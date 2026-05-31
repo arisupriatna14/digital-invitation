@@ -51,7 +51,7 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
   };
 
   return (
-    <div ref={scope} className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-ink overflow-hidden">
+    <div ref={scope} className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-petal overflow-hidden">
       {/* Floating petals on envelope screen */}
       {[0, 1, 2, 3].map((i) => (
         <svg
@@ -68,14 +68,14 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
           }}
           viewBox="0 0 12 18"
         >
-          <path d="M6 0 C10 4, 12 9, 6 18 C0 9, 2 4, 6 0Z" fill="#C9798A" opacity="0.4" />
+          <path d="M6 0 C10 4, 12 9, 6 18 C0 9, 2 4, 6 0Z" fill="#C9798A" opacity="0.5" />
         </svg>
       ))}
 
       {/* Decorative circles */}
-      <div className="absolute top-10 left-10 w-32 h-32 rounded-full border border-blossom/10" />
-      <div className="absolute bottom-20 right-10 w-48 h-48 rounded-full border border-blossom/10" />
-      <div className="absolute top-1/3 right-8 w-16 h-16 rounded-full border border-cream/10" />
+      <div className="absolute top-10 left-10 w-32 h-32 rounded-full border border-blossom/20" />
+      <div className="absolute bottom-20 right-10 w-48 h-48 rounded-full border border-blossom/20" />
+      <div className="absolute top-1/3 right-8 w-16 h-16 rounded-full border border-sage/15" />
 
       {/* Guest name */}
       <motion.div
@@ -84,10 +84,10 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
         transition={{ duration: 0.8, ease: EASE.OUT_QUART, delay: 0.3 }}
         className="text-center mb-8 z-10"
       >
-        <p className="font-sans text-xs uppercase tracking-[0.3em] text-cream/50 mb-1">
+        <p className="font-sans text-xs uppercase tracking-[0.3em] text-ink/40 mb-1">
           Kepada Yth.
         </p>
-        <p className="font-serif text-xl italic text-cream/80">
+        <p className="font-serif text-xl italic text-ink/75">
           {guestName || "Tamu Undangan"}
         </p>
       </motion.div>
@@ -133,7 +133,7 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
             style={{
               height: "60%",
               clipPath: "polygon(0 0, 50% 55%, 100% 0)",
-              background: "linear-gradient(180deg, #e0cfa0 0%, #f2e5c5 100%)",
+              background: "linear-gradient(180deg, #F5CDD7 0%, #FDE8EE 100%)",
               borderRadius: "inherit",
               transformStyle: "preserve-3d",
               backfaceVisibility: "hidden",
@@ -163,14 +163,14 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
         <button
           onClick={handleOpen}
           disabled={isOpening}
-          className="relative group btn-primary bg-cream-light/10 border border-cream-light/30 text-cream-light hover:bg-cream-light/20 hover:border-cream-light/50 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="relative group btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isOpening ? (
             <span className="flex items-center gap-2">
               <motion.span
                 animate={{ rotate: 360 }}
                 transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                className="inline-block w-3 h-3 border border-cream-light/50 border-t-cream-light rounded-full"
+                className="inline-block w-3 h-3 border border-cream-light/40 border-t-cream-light rounded-full"
               />
               Membuka...
             </span>
@@ -180,13 +180,13 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
           {/* Pulse ring on button */}
           {!isOpening && (
             <motion.span
-              className="absolute inset-0 rounded-full border border-cream-light/30"
+              className="absolute inset-0 rounded-full border border-ink/20"
               animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />
           )}
         </button>
-        <p className="font-sans text-xs text-cream/30 mt-3 tracking-widest">
+        <p className="font-sans text-xs text-ink/35 mt-3 tracking-widest">
           Klik untuk membuka undangan
         </p>
       </motion.div>
