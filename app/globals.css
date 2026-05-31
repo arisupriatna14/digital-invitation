@@ -1,27 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: #FDE8EE;
+    color: #4B3B47;
+    overflow-x: hidden;
+  }
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
+@layer components {
+  .section-container {
+    @apply max-w-4xl mx-auto px-6 py-16 md:py-24;
+  }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .card-elegant {
+    @apply bg-cream/95 backdrop-blur-sm border border-blossom/15 rounded-2xl shadow-sm p-6 md:p-8;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-ink text-cream font-sans font-medium px-8 py-3 rounded-full tracking-widest uppercase text-xs hover:bg-ink-light transition-all duration-300 hover:shadow-lg hover:shadow-ink/20 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border-2 border-ink/40 text-ink font-sans font-medium px-6 py-2.5 rounded-full tracking-widest uppercase text-xs hover:bg-ink hover:text-cream transition-all duration-300 active:scale-95;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 text-ink/60 font-sans font-medium px-4 py-2 rounded-full text-xs tracking-wide hover:bg-ink/10 transition-all duration-200 active:scale-95;
+  }
+
+  .input-elegant {
+    @apply w-full bg-petal-light border border-blossom/30 rounded-xl px-4 py-3 font-sans text-ink placeholder-ink/30 text-sm focus:outline-none focus:ring-2 focus:ring-blossom/40 focus:border-blossom/50 transition-all duration-200;
+    font-size: 16px;
+  }
+
+  .arabic {
+    font-family: "Amiri", "Traditional Arabic", serif;
+    direction: rtl;
+    text-align: center;
+    line-height: 2.2;
+  }
+
+  .skeleton {
+    @apply bg-gradient-to-r from-petal-dark via-petal-light to-petal-dark;
+    background-size: 200% 100%;
+    animation: shimmer 2s ease-in-out infinite;
   }
 }
+
+.petal { will-change: transform; position: absolute; }

@@ -9,8 +9,86 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        ink: {
+          DEFAULT: "#4B3B47",
+          light: "#6E5B6A",
+          dark: "#2E2230",
+        },
+        blossom: {
+          DEFAULT: "#C9798A",
+          light: "#F0B8C4",
+          dark: "#A85E6E",
+        },
+        petal: {
+          DEFAULT: "#FDE8EE",
+          light: "#FFF0F5",
+          dark: "#F5CDD7",
+        },
+        cream: {
+          DEFAULT: "#FFFBF5",
+          light: "#FFFFFF",
+          dark: "#F0E8D8",
+        },
+        sage: {
+          DEFAULT: "#87A878",
+          light: "#B5CCA9",
+          dark: "#5E7B52",
+        },
+      },
+      fontFamily: {
+        display: ["var(--font-playfair)", "serif"],
+        serif: ["var(--font-cormorant)", "serif"],
+        sans: ["var(--font-poppins)", "sans-serif"],
+      },
+      keyframes: {
+        "float-petal": {
+          "0%": {
+            transform: "translateY(-10vh) translateX(0px) rotate(0deg)",
+            opacity: "0",
+          },
+          "10%": { opacity: "1" },
+          "90%": { opacity: "0.8" },
+          "100%": {
+            transform: "translateY(110vh) translateX(70px) rotate(720deg)",
+            opacity: "0",
+          },
+        },
+        "float-petal-left": {
+          "0%": {
+            transform: "translateY(-10vh) translateX(0px) rotate(0deg)",
+            opacity: "0",
+          },
+          "10%": { opacity: "1" },
+          "90%": { opacity: "0.7" },
+          "100%": {
+            transform: "translateY(110vh) translateX(-55px) rotate(-540deg)",
+            opacity: "0",
+          },
+        },
+        "fade-in-up": {
+          "0%": { transform: "translateY(30px)", opacity: "0" },
+          "100%": { transform: "translateY(0px)", opacity: "1" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
+        "pulse-ring": {
+          "0%, 100%": { transform: "scale(1)", opacity: "0.6" },
+          "50%": { transform: "scale(1.5)", opacity: "0" },
+        },
+        sway: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        },
+      },
+      animation: {
+        "float-petal": "float-petal linear infinite",
+        "float-petal-left": "float-petal-left linear infinite",
+        "fade-in-up": "fade-in-up 0.8s ease-out forwards",
+        shimmer: "shimmer 2s ease-in-out infinite",
+        "pulse-ring": "pulse-ring 2s ease-in-out infinite",
+        sway: "sway 4s ease-in-out infinite",
       },
     },
   },
