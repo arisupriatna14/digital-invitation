@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { fadeUpVariants, staggerContainerVariants } from "@/lib/variants";
 import FlowerDivider from "./FlowerDivider";
+import BouquetCluster from "./BouquetCluster";
 
 interface SectionHeaderProps {
   eyebrow?: string;
@@ -20,6 +21,9 @@ export default function SectionHeader({ eyebrow, title, subtitle, className = ""
       viewport={{ once: true, margin: "-60px" }}
       variants={staggerContainerVariants}
     >
+      <motion.div variants={fadeUpVariants} className="flex justify-center mb-5">
+        <BouquetCluster width={240} />
+      </motion.div>
       {eyebrow && (
         <motion.p variants={fadeUpVariants} className="font-sans text-xs uppercase tracking-[0.35em] text-blossom/80 mb-2">
           {eyebrow}

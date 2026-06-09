@@ -22,10 +22,10 @@ export default function Hero() {
     >
       {/* Floral corners with parallax */}
       <motion.div style={{ y: cornerY }} className="absolute inset-0 pointer-events-none">
-        <FloralCorner position="top-left" size={170} opacity={0.9} />
-        <FloralCorner position="top-right" size={170} opacity={0.9} />
-        <FloralCorner position="bottom-left" size={130} opacity={0.7} />
-        <FloralCorner position="bottom-right" size={130} opacity={0.7} />
+        <FloralCorner position="top-left" size={240} opacity={0.9} />
+        <FloralCorner position="top-right" size={240} opacity={0.9} />
+        <FloralCorner position="bottom-left" size={190} opacity={0.7} />
+        <FloralCorner position="bottom-right" size={190} opacity={0.7} />
       </motion.div>
 
       {/* Subtle radial glow center */}

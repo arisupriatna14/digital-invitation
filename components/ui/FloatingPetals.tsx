@@ -1,39 +1,22 @@
 "use client";
 
+// Aset bunga & daun kecil yang melayang turun
+const PETAL_ASSETS = [
+  { src: "/images/flowers/leaf-pink.png", w: 22, h: 40 },
+  { src: "/images/flowers/primrose.png", w: 34, h: 34 },
+  { src: "/images/flowers/leaf-sage.png", w: 24, h: 35 },
+  { src: "/images/flowers/leaf-green.png", w: 18, h: 34 },
+  { src: "/images/flowers/leaf-olive-small.png", w: 22, h: 29 },
+];
+
 const PETALS = Array.from({ length: 16 }, (_, i) => ({
   id: i,
   left: `${i * 6.5}%`,
   delay: `${i * 1.05}s`,
   duration: `${9 + (i % 4) * 1.5}s`,
   isLeft: i % 2 === 0,
-  type: i % 3,
+  asset: PETAL_ASSETS[i % PETAL_ASSETS.length],
 }));
-
-function PetalSVG({ type }: { type: number }) {
-  if (type === 0) {
-    // Cherry blossom petal
-    return (
-      <svg viewBox="0 0 14 18" fill="none">
-        <path d="M7 1 C11 3, 13 8, 10 14 C8 17, 5 17, 4 14 C1 8, 3 3, 7 1Z" fill="#C9798A" opacity="0.45" />
-        <path d="M7 1 C7 6, 8 11, 10 14" stroke="#F0B8C4" strokeWidth="0.5" opacity="0.4" />
-      </svg>
-    );
-  }
-  if (type === 1) {
-    // Round petal
-    return (
-      <svg viewBox="0 0 12 16" fill="none">
-        <ellipse cx="6" cy="9" rx="5" ry="7" fill="#F0B8C4" opacity="0.5" />
-      </svg>
-    );
-  }
-  // Leaf
-  return (
-    <svg viewBox="0 0 10 16" fill="none">
-      <path d="M5 0 C9 4, 10 9, 5 16 C0 9, 1 4, 5 0Z" fill="#87A878" opacity="0.35" />
-    </svg>
-  );
-}
 
 export default function FloatingPetals() {
   return (
@@ -47,11 +30,18 @@ export default function FloatingPetals() {
             top: "-5%",
             animationDelay: p.delay,
             animationDuration: p.duration,
-            width: 10 + (p.id % 3) * 3,
-            height: 14 + (p.id % 3) * 4,
+            width: p.asset.w,
+            height: p.asset.h,
+            opacity: 0.75,
           }}
         >
-          <PetalSVG type={p.type} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={p.asset.src}
+            alt=""
+            aria-hidden
+            className="h-full w-full select-none object-contain"
+          />
         </div>
       ))}
     </div>

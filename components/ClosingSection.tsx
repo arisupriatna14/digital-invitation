@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { MessageCircle, CalendarPlus, Heart } from "lucide-react";
+import BouquetCluster from "@/components/ui/BouquetCluster";
 import { WEDDING_DATA } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import { staggerContainerVariants, fadeUpVariants } from "@/lib/variants";
@@ -21,10 +22,10 @@ export default function ClosingSection() {
 
   return (
     <section className="relative bg-gradient-to-b from-petal-light to-blossom/20 py-24 md:py-32 overflow-hidden">
-      <FloralCorner position="top-left" size={140} opacity={0.18} />
-      <FloralCorner position="top-right" size={140} opacity={0.18} />
-      <FloralCorner position="bottom-left" size={110} opacity={0.14} />
-      <FloralCorner position="bottom-right" size={110} opacity={0.14} />
+      <FloralCorner position="top-left" size={200} opacity={0.18} />
+      <FloralCorner position="top-right" size={200} opacity={0.18} />
+      <FloralCorner position="bottom-left" size={160} opacity={0.14} />
+      <FloralCorner position="bottom-right" size={160} opacity={0.14} />
 
       {/* Background circles */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-blossom/10 pointer-events-none" />
@@ -37,27 +38,9 @@ export default function ClosingSection() {
         viewport={{ once: true, margin: "-80px" }}
         variants={staggerContainerVariants}
       >
-        {/* Wreath illustration */}
+        {/* Bouquet illustration */}
         <motion.div variants={fadeUpVariants} className="flex justify-center mb-8">
-          <svg width="120" height="80" viewBox="0 0 120 80" fill="none">
-            {/* Left branch */}
-            <path d="M10 60 Q20 40 15 20 Q30 30 25 50 Q20 60 10 60Z" fill="#9eb5a3" opacity="0.5" />
-            <path d="M20 50 Q35 35 30 18 Q42 28 38 48 Q32 56 20 50Z" fill="#9eb5a3" opacity="0.4" />
-            <path d="M5 65 Q15 55 12 42 Q22 50 18 62 Q12 68 5 65Z" fill="#9eb5a3" opacity="0.35" />
-            {/* Right branch (mirror) */}
-            <path d="M110 60 Q100 40 105 20 Q90 30 95 50 Q100 60 110 60Z" fill="#9eb5a3" opacity="0.5" />
-            <path d="M100 50 Q85 35 90 18 Q78 28 82 48 Q88 56 100 50Z" fill="#9eb5a3" opacity="0.4" />
-            <path d="M115 65 Q105 55 108 42 Q98 50 102 62 Q108 68 115 65Z" fill="#9eb5a3" opacity="0.35" />
-            {/* Center flowers */}
-            <circle cx="60" cy="35" r="6" fill="#C9798A" opacity="0.6" />
-            <circle cx="52" cy="32" r="4" fill="#C9798A" opacity="0.4" />
-            <circle cx="68" cy="32" r="4" fill="#C9798A" opacity="0.4" />
-            <circle cx="55" cy="40" r="3" fill="#C9798A" opacity="0.3" />
-            <circle cx="65" cy="40" r="3" fill="#C9798A" opacity="0.3" />
-            <circle cx="60" cy="35" r="2.5" fill="#FFFBF5" />
-            {/* Stem */}
-            <path d="M28 58 Q45 52 60 50 Q75 52 92 58" stroke="#9eb5a3" strokeWidth="1.5" fill="none" strokeLinecap="round" opacity="0.5" />
-          </svg>
+          <BouquetCluster width={300} src="/images/flowers/bouquet-2.png" />
         </motion.div>
 
         {/* Names */}

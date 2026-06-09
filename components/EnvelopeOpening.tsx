@@ -54,7 +54,7 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
     <div ref={scope} className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-petal overflow-hidden">
       {/* Floating petals on envelope screen */}
       {[0, 1, 2, 3].map((i) => (
-        <svg
+        <div
           key={i}
           className={`absolute petal ${i % 2 === 0 ? "animate-float-petal" : "animate-float-petal-left"}`}
           style={{
@@ -62,14 +62,23 @@ export default function EnvelopeOpening({ onOpen }: EnvelopeOpeningProps) {
             top: "-5%",
             animationDelay: `${i * 2}s`,
             animationDuration: `${9 + i}s`,
-            width: 12,
-            height: 18,
-            opacity: 0,
+            width: 26,
+            height: 30,
+            opacity: 0.7,
           }}
-          viewBox="0 0 12 18"
         >
-          <path d="M6 0 C10 4, 12 9, 6 18 C0 9, 2 4, 6 0Z" fill="#C9798A" opacity="0.5" />
-        </svg>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={
+              i % 2 === 0
+                ? "/images/flowers/leaf-pink.png"
+                : "/images/flowers/primrose.png"
+            }
+            alt=""
+            aria-hidden
+            className="h-full w-full select-none object-contain"
+          />
+        </div>
       ))}
 
       {/* Decorative circles */}
