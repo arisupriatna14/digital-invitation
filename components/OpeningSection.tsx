@@ -1,69 +1,85 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { staggerContainerVariants, fadeUpVariants, fadeInVariants } from "@/lib/variants";
-import FlowerDivider from "@/components/ui/FlowerDivider";
+import { WEDDING_DATA } from "@/lib/constants";
 
+const OUT = [0.19, 1, 0.22, 1] as const;
+const VIEW = { once: true, margin: "-60px 0px" } as const;
+
+// Ayat Al-Qur'an dalam bingkai renda oval. Semua posisi dalam persen
+// terhadap kanvas desain 876 x 1032, teks memakai cqw agar ikut menskala.
 export default function OpeningSection() {
+  const { quote } = WEDDING_DATA;
+
   return (
-    <section className="bg-gradient-to-b from-petal via-petal-light/60 to-petal py-20 md:py-28 relative overflow-hidden">
-      {/* Subtle background circles */}
-      <div className="absolute inset-0 pointer-events-none opacity-30">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full border border-blossom/20" />
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full border border-sage/20" />
-      </div>
-
-      <motion.div
-        className="section-container relative z-10"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={staggerContainerVariants}
+    <section className="bg-olive px-0 py-6 overflow-hidden">
+      {/* Kanvas diperbesar 120% (sisi kiri-kanan desain yang kosong dipotong)
+          agar bingkai & bunga tampil lebih besar; teks ikut menskala. */}
+      <div
+        className="relative -ml-[10%] w-[120%] [container-type:inline-size]"
+        style={{ aspectRatio: "876 / 1032" }}
       >
-        <FlowerDivider size="lg" />
-
-        {/* Bismillah */}
-        <motion.div variants={fadeUpVariants} className="text-center mb-8 mt-4">
-          <p className="arabic text-2xl md:text-3xl text-ink/80 leading-loose">
-            بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ
-          </p>
-        </motion.div>
-
-        {/* Quran verse card */}
+        {/* Bingkai renda oval */}
         <motion.div
-          variants={fadeInVariants}
-          className="max-w-2xl mx-auto text-center bg-cream/80 rounded-3xl p-6 md:p-10 border border-blossom/15 shadow-sm mb-6"
+          initial={{ opacity: 0, scale: 0.85 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={VIEW}
+          transition={{ duration: 1.8, ease: OUT }}
+          className="absolute left-[12.5%] top-[6.5%] w-[75%]"
         >
-          <p className="arabic text-lg md:text-xl text-ink/85 leading-loose mb-5">
-            وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا
-            وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
-          </p>
-
-          <FlowerDivider size="sm" className="my-4" />
-
-          <p className="font-serif text-sm md:text-base italic text-ink/65 leading-relaxed">
-            &ldquo;Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu istri-istri
-            dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya
-            di antaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat
-            tanda-tanda bagi kaum yang berpikir.&rdquo;
-          </p>
-          <p className="font-sans text-[10px] uppercase tracking-[0.3em] text-blossom/80 mt-3">
-            Q.S. Ar-Rum: 21
-          </p>
+          <Image src="/images/quran/lace-oval.png" alt="" aria-hidden width={1043} height={1365} className="h-auto w-full" />
         </motion.div>
 
-        <FlowerDivider size="sm" />
+        {/* Isi ayat */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={VIEW}
+          transition={{ duration: 1.4, ease: OUT, delay: 0.5 }}
+          className="absolute left-[29%] top-[21%] w-[42%] text-center text-[#2B2B23]"
+        >
+          <h2 className="font-caps text-[3.2cqw] font-bold tracking-wide">{quote.title}</h2>
 
-        <motion.div variants={fadeUpVariants} className="text-center max-w-xl mx-auto mt-6">
-          <p className="font-sans text-[10px] uppercase tracking-[0.35em] text-blossom/80 mb-4">
-            Dengan Memohon Ridha Allah SWT
+          <p className="arabic mt-[4cqw] text-[3cqw] !leading-[1.9]">
+            {quote.bismillah}
+            <br />
+            {quote.arabic}
           </p>
-          <p className="font-serif text-base md:text-lg text-ink/70 leading-relaxed italic">
-            Kami mengundang Bapak / Ibu / Saudara / Saudari untuk hadir dan memberikan
-            doa restu dalam acara pernikahan kami
-          </p>
+
+          <span className="mx-auto mt-[2cqw] block h-px w-[14cqw] bg-[#2B2B23]/70" />
+
+          <p className="mt-[3cqw] font-sans text-[2.2cqw] leading-[1.6]">&ldquo;{quote.text}&rdquo;</p>
         </motion.div>
-      </motion.div>
+
+        {/* Bunga lili, kiri atas (masuk dari kiri) */}
+        <motion.div
+          initial={{ opacity: 0, x: -40, rotate: -10 }}
+          whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+          viewport={VIEW}
+          transition={{ duration: 1.8, ease: OUT, delay: 0.8 }}
+          className="pointer-events-none absolute left-[11%] top-[10.5%] w-[23%]"
+        >
+          <Image src="/images/quran/lily.png" alt="" aria-hidden width={342} height={341} className="h-auto w-full" />
+        </motion.div>
+
+        {/* Bunga calla & pita renda, kanan bawah (masuk dari kanan) */}
+        <motion.div
+          initial={{ opacity: 0, x: 40, y: 20 }}
+          whileInView={{ opacity: 1, x: 0, y: 0 }}
+          viewport={VIEW}
+          transition={{ duration: 1.8, ease: OUT, delay: 1 }}
+          className="pointer-events-none absolute left-[65.5%] top-[56%] w-[26.5%]"
+        >
+          <motion.div
+            animate={{ rotate: [-1.5, 1.5, -1.5] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+            className="origin-bottom"
+          >
+            <Image src="/images/quran/calla-bow.png" alt="" aria-hidden width={394} height={569} className="h-auto w-full" />
+          </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 }

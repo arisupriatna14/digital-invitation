@@ -32,11 +32,10 @@ export default function RSVPSection() {
   };
 
   return (
-    <section className="bg-gradient-to-b from-petal to-petal-light/50 py-20 md:py-28">
-      <div className="section-container max-w-xl">
+    <section className="section bg-white pt-6">
+      <div>
         <SectionHeader
-          eyebrow="Konfirmasi Kehadiran"
-          title="RSVP"
+          title="Konfirmasi Kehadiran"
           subtitle="Mohon konfirmasi kehadiran Anda selambatnya 3 hari sebelum acara"
         />
 
@@ -49,12 +48,12 @@ export default function RSVPSection() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20, transition: { duration: 0.25 } }}
               transition={{ duration: 0.5, ease: EASE.OUT_QUART }}
-              className="card-elegant space-y-5"
+              className="bg-ivory-light border border-olive/10 rounded-2xl shadow-sm p-6 space-y-5"
             >
               {/* Name */}
               <div>
-                <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-ink/60 block mb-2">
-                  Nama Lengkap <span className="text-blossom">*</span>
+                <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-olive/60 block mb-2">
+                  Nama Lengkap <span className="text-olive-soft">*</span>
                 </label>
                 <input
                   type="text"
@@ -62,13 +61,13 @@ export default function RSVPSection() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Nama Anda"
                   required
-                  className="input-elegant"
+                  className="input-olive"
                 />
               </div>
 
               {/* Phone */}
               <div>
-                <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-ink/60 block mb-2">
+                <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-olive/60 block mb-2">
                   Nomor HP / WhatsApp
                 </label>
                 <input
@@ -76,14 +75,14 @@ export default function RSVPSection() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="08xxxxxxxxxx (opsional)"
-                  className="input-elegant"
+                  className="input-olive"
                 />
               </div>
 
               {/* Attending radio */}
               <div>
-                <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-ink/60 block mb-3">
-                  Konfirmasi Kehadiran <span className="text-blossom">*</span>
+                <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-olive/60 block mb-3">
+                  Konfirmasi Kehadiran <span className="text-olive-soft">*</span>
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   {[
@@ -96,8 +95,8 @@ export default function RSVPSection() {
                       onClick={() => setAttending(option.value)}
                       className={`py-3 px-4 rounded-xl border-2 font-sans text-xs text-center transition-all duration-200 ${
                         attending === option.value
-                          ? "border-ink bg-ink text-cream-light"
-                          : "border-blossom/30 bg-cream-light text-ink/70 hover:border-blossom/60"
+                          ? "border-olive bg-olive text-ivory-light"
+                          : "border-olive/20 bg-white text-olive/70 hover:border-olive/50"
                       }`}
                     >
                       {option.label}
@@ -115,28 +114,28 @@ export default function RSVPSection() {
                     exit={{ opacity: 0, height: 0 }}
                     transition={{ duration: 0.3, ease: EASE.OUT_QUART }}
                   >
-                    <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-ink/60 block mb-2">
+                    <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-olive/60 block mb-2">
                       Jumlah Tamu
                     </label>
                     <div className="flex items-center gap-4">
                       <button
                         type="button"
                         onClick={() => setGuests((g) => Math.max(1, g - 1))}
-                        className="w-9 h-9 rounded-full border-2 border-blossom/40 flex items-center justify-center text-ink hover:border-ink hover:bg-ink hover:text-cream-light transition-all duration-200 text-sm font-bold"
+                        className="w-9 h-9 rounded-full border-2 border-olive/30 flex items-center justify-center text-olive hover:border-olive hover:bg-olive hover:text-ivory-light transition-all duration-200 text-sm font-bold"
                       >
                         −
                       </button>
-                      <span className="font-display text-xl text-ink min-w-[2ch] text-center">
+                      <span className="font-display text-xl text-olive min-w-[2ch] text-center">
                         {guests}
                       </span>
                       <button
                         type="button"
                         onClick={() => setGuests((g) => Math.min(5, g + 1))}
-                        className="w-9 h-9 rounded-full border-2 border-blossom/40 flex items-center justify-center text-ink hover:border-ink hover:bg-ink hover:text-cream-light transition-all duration-200 text-sm font-bold"
+                        className="w-9 h-9 rounded-full border-2 border-olive/30 flex items-center justify-center text-olive hover:border-olive hover:bg-olive hover:text-ivory-light transition-all duration-200 text-sm font-bold"
                       >
                         +
                       </button>
-                      <span className="font-sans text-xs text-ink/50">orang (maks. 5)</span>
+                      <span className="font-sans text-xs text-olive/50">orang (maks. 5)</span>
                     </div>
                   </motion.div>
                 )}
@@ -163,14 +162,14 @@ export default function RSVPSection() {
               <button
                 type="submit"
                 disabled={status === "loading" || !name.trim() || attending === null}
-                className="btn-primary w-full justify-center"
+                className="btn-olive w-full"
               >
                 {status === "loading" ? (
                   <span className="flex items-center gap-2">
                     <motion.span
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      className="inline-block w-3 h-3 border border-cream-light/40 border-t-cream-light rounded-full"
+                      className="inline-block w-3 h-3 border border-ivory-light/40 border-t-ivory-light rounded-full"
                     />
                     Mengirim...
                   </span>
@@ -185,20 +184,20 @@ export default function RSVPSection() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ ...SPRING.BOUNCY, delay: 0.1 }}
-              className="card-elegant text-center py-12"
+              className="bg-ivory-light border border-olive/10 rounded-2xl shadow-sm p-6 text-center py-12"
             >
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ ...SPRING.BOUNCY, delay: 0.3 }}
-                className="w-16 h-16 bg-sage/20 rounded-full flex items-center justify-center mx-auto mb-4"
+                className="w-16 h-16 bg-olive/10 rounded-full flex items-center justify-center mx-auto mb-4"
               >
-                <CheckCircle2 size={32} className="text-sage-dark-dark" />
+                <CheckCircle2 size={32} className="text-olive" />
               </motion.div>
-              <h3 className="font-display text-xl italic text-ink mb-2">
+              <h3 className="font-script text-4xl text-olive mb-2">
                 Terima Kasih, {name}!
               </h3>
-              <p className="font-serif text-sm italic text-ink/60">
+              <p className="font-serif text-sm italic text-olive/60">
                 {attending
                   ? "Kami sangat menantikan kehadiran Anda. Sampai jumpa di hari istimewa kami!"
                   : "Kami sangat menghargai kabar dari Anda. Doa Anda berarti bagi kami."}

@@ -1,144 +1,123 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { MessageCircle, CalendarPlus, Heart } from "lucide-react";
-import BouquetCluster from "@/components/ui/BouquetCluster";
+import { MessageCircle } from "lucide-react";
 import { WEDDING_DATA } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
-import { staggerContainerVariants, fadeUpVariants } from "@/lib/variants";
-import FlowerDivider from "@/components/ui/FlowerDivider";
-import FloralCorner from "@/components/ui/FloralCorner";
+import WaxSeal from "@/components/ornaments/WaxSeal";
+import Flourish from "@/components/ornaments/Flourish";
+import Reveal from "@/components/ornaments/Reveal";
+
+const OUT = [0.19, 1, 0.22, 1] as const;
+const VIEW = { once: true, margin: "-40px 0px" } as const;
+
+// Ornamen diukur dari gambar desain (686 x 1190). Sisi kanan adalah cerminan sisi kiri,
+// tetapi animasinya dibuat berbeda (waktu masuk, arah, dan fase goyangan) agar tidak serempak.
+const ORNAMENTS = [
+  // Buket calla putih di sudut atas
+  { src: "/images/closing/calla-white-spray.png", w: 687, h: 1031, left: -6, top: 9.2, width: 42, rotate: -6, origin: "origin-bottom", from: { x: -30, y: -20 }, delay: 0.2, duration: 1.5, sway: 6.5 },
+  { src: "/images/closing/calla-white-spray.png", w: 687, h: 1031, left: 64, top: 9.2, width: 42, rotate: 6, origin: "origin-bottom", from: { x: 30, y: 10 }, delay: 0.7, duration: 1.9, sway: 8, reverse: true, flip: true },
+  // Calla pink di sisi tengah
+  { src: "/images/closing/calla-pink-spray.png", w: 600, h: 1066, left: -7, top: 46.9, width: 38.7, rotate: 0, origin: "origin-bottom", from: { x: -40, y: 20 }, delay: 0.4, duration: 1.6, sway: 7 },
+  { src: "/images/closing/calla-pink-spray.png", w: 600, h: 1066, left: 68.3, top: 46.9, width: 38.7, rotate: 0, origin: "origin-bottom", from: { x: 40, y: -10 }, delay: 0.9, duration: 2.0, sway: 5.5, reverse: true, flip: true },
+  // Rangkaian bunga pink di bawah
+  { src: "/images/closing/pink-cluster.png", w: 917, h: 516, left: -3, top: 75.3, width: 67, rotate: 0, origin: "origin-bottom", from: { x: -20, y: 30 }, delay: 0.6, duration: 1.6, sway: 7.5 },
+  { src: "/images/closing/pink-cluster.png", w: 917, h: 516, left: 36, top: 75.3, width: 67, rotate: 0, origin: "origin-bottom", from: { x: 20, y: 40 }, delay: 1.1, duration: 2.1, sway: 6, reverse: true, flip: true },
+];
 
 export default function ClosingSection() {
+  const { groom, bride, akad } = WEDDING_DATA;
   const shareText = typeof window !== "undefined"
     ? encodeURIComponent(
-        `Assalamu'alaikum, kami mengundang Anda ke pernikahan Ari Supriatna & Atikah Sulastri pada ${formatDate(WEDDING_DATA.akad.date)}. Lihat undangan lengkap: ${window.location.origin}`
+        `Assalamu'alaikum, kami mengundang Anda ke pernikahan ${groom.name} & ${bride.name} pada ${formatDate(akad.date)}. Lihat undangan lengkap: ${window.location.origin}`
       )
     : "";
 
-  const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-    "Pernikahan Ari Supriatna & Atikah Sulastri"
-  )}&dates=${WEDDING_DATA.akad.date.toISOString().replace(/[-:]/g, "").split(".")[0]}Z/${WEDDING_DATA.resepsi.date.toISOString().replace(/[-:]/g, "").split(".")[0]}Z&location=${encodeURIComponent(WEDDING_DATA.akad.address)}&details=${encodeURIComponent("Pernikahan Ari Supriatna & Atikah Sulastri")}`;
-
   return (
-    <section className="relative bg-gradient-to-b from-petal-light to-blossom/20 py-24 md:py-32 overflow-hidden">
-      <FloralCorner position="top-left" size={200} opacity={0.18} />
-      <FloralCorner position="top-right" size={200} opacity={0.18} />
-      <FloralCorner position="bottom-left" size={160} opacity={0.14} />
-      <FloralCorner position="bottom-right" size={160} opacity={0.14} />
-
-      {/* Background circles */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-blossom/10 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full border border-sage/10 pointer-events-none" />
-
-      <motion.div
-        className="section-container relative z-10 text-center max-w-2xl"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-80px" }}
-        variants={staggerContainerVariants}
-      >
-        {/* Bouquet illustration */}
-        <motion.div variants={fadeUpVariants} className="flex justify-center mb-8">
-          <BouquetCluster width={300} src="/images/flowers/bouquet-2.png" />
-        </motion.div>
-
-        {/* Names */}
-        <motion.h2
-          variants={fadeUpVariants}
-          className="font-display text-3xl md:text-4xl italic text-ink leading-tight mb-2"
-        >
-          {WEDDING_DATA.groom.name}
-        </motion.h2>
-        <motion.p variants={fadeUpVariants} className="font-serif text-2xl text-ink/60 mb-2">
-          &
-        </motion.p>
-        <motion.h2
-          variants={fadeUpVariants}
-          className="font-display text-3xl md:text-4xl italic text-ink leading-tight"
-        >
-          {WEDDING_DATA.bride.name}
-        </motion.h2>
-
-        <motion.div variants={fadeUpVariants}>
-          <FlowerDivider size="sm" className="my-6" />
-        </motion.div>
-
-        <motion.p
-          variants={fadeUpVariants}
-          className="font-sans text-xs uppercase tracking-[0.3em] text-ink/60 mb-8"
-        >
-          {formatDate(WEDDING_DATA.akad.date)}
-        </motion.p>
-
-        {/* Message */}
-        <motion.p
-          variants={fadeUpVariants}
-          className="font-serif text-sm md:text-base italic text-ink/65 leading-relaxed mb-8"
-        >
-          Merupakan suatu kebahagiaan dan kehormatan bagi kami apabila
-          Bapak / Ibu / Saudara / Saudari berkenan hadir untuk memberikan
-          doa restu kepada kami.
-        </motion.p>
-
-        {/* Buttons */}
+    <section className="relative bg-olive pt-6 pb-24 overflow-hidden">
+      <div className="relative w-full [container-type:inline-size]" style={{ aspectRatio: "686 / 1090" }}>
+        {/* Lace frame sebagai latar tulisan */}
         <motion.div
-          variants={fadeUpVariants}
-          className="flex flex-wrap items-center justify-center gap-3 mb-10"
+          initial={{ opacity: 0, scale: 0.94 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={VIEW}
+          transition={{ duration: 1.3, ease: OUT }}
+          className="absolute left-[-2%] top-[9.8%] z-10 w-[102.5%]"
         >
-          <a
-            href={`https://wa.me/?text=${shareText}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#25D366] text-white font-sans font-medium px-6 py-2.5 rounded-full tracking-widest uppercase text-xs hover:bg-[#1ebe5d] transition-all duration-300 hover:shadow-lg hover:shadow-green-500/25 active:scale-95"
-          >
-            <MessageCircle size={14} />
-            Bagikan via WhatsApp
-          </a>
-          <a
-            href={calendarUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-outline"
-          >
-            <CalendarPlus size={14} />
-            Simpan ke Kalender
-          </a>
+          <Image
+            src="/images/closing/lace-frame.png"
+            alt=""
+            aria-hidden
+            width={831}
+            height={1100}
+            className="h-auto w-full"
+            sizes="(max-width: 480px) 100vw, 500px"
+          />
         </motion.div>
 
-        <motion.div variants={fadeUpVariants}>
-          <FlowerDivider size="sm" className="mb-6" />
-        </motion.div>
+        {/* Isi teks, di dalam area krem frame dan di antara ornamen */}
+        <div className="absolute left-[20%] top-[21%] z-20 flex h-[54%] w-[60%] flex-col items-center justify-center text-center text-olive">
+          <Reveal from="zoom">
+            <WaxSeal size={76} initials={[groom.nickname.charAt(0), bride.nickname.charAt(0)]} />
+          </Reveal>
+          <Reveal as="h2" delay={0.1} className="font-script text-[10cqw] leading-none mt-[3cqw]">
+            Terima Kasih!
+          </Reveal>
+          <Reveal as="p" delay={0.2} className="mt-[3.5cqw] font-serif text-[3.2cqw] leading-[1.35]">
+            Merupakan suatu kebahagiaan dan kehormatan bagi kami apabila Bapak/Ibu/Saudara/i
+            berkenan hadir dan memberikan doa restu kepada kami.
+          </Reveal>
+          <Reveal as="p" delay={0.3} className="mt-[3.5cqw] font-serif italic text-[3.2cqw] leading-[1.35]">
+            Wassalamu&apos;alaikum Warahmatullahi Wabarakatuh
+          </Reveal>
+          <Reveal as="p" delay={0.4} className="mt-[3.5cqw] font-script text-[7.5cqw] leading-none">
+            {groom.nickname} &amp; {bride.nickname}
+          </Reveal>
+          <Reveal delay={0.5} className="mt-[3.5cqw] text-olive/70">
+            <Flourish width={56} />
+          </Reveal>
+        </div>
 
-        <motion.p
-          variants={fadeUpVariants}
-          className="font-serif text-lg md:text-xl italic text-ink/70 mb-4"
-        >
-          Wassalamu&apos;alaikum Warahmatullahi Wabarakatuh
-        </motion.p>
-
-        {/* Heart */}
-        <motion.div
-          variants={fadeUpVariants}
-          className="flex items-center justify-center gap-2"
-        >
-          <div className="h-px w-12 bg-blossom/30" />
+        {ORNAMENTS.map((o, i) => (
           <motion.div
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            key={i}
+            initial={{ opacity: 0, ...o.from }}
+            whileInView={{ opacity: 1, x: 0, y: 0 }}
+            viewport={VIEW}
+            transition={{ duration: o.duration, ease: OUT, delay: o.delay }}
+            className="pointer-events-none absolute z-30"
+            style={{ left: `${o.left}%`, top: `${o.top}%`, width: `${o.width}%` }}
           >
-            <Heart size={16} className="text-blossom fill-blossom" />
+            <motion.div
+              animate={{ rotate: o.reverse ? [o.rotate + 2, o.rotate - 2, o.rotate + 2] : [o.rotate - 2, o.rotate + 2, o.rotate - 2] }}
+              transition={{ duration: o.sway, repeat: Infinity, ease: "easeInOut", delay: o.reverse ? 1.2 : 0 }}
+              className={o.origin}
+            >
+              <Image
+                src={o.src}
+                alt=""
+                aria-hidden
+                width={o.w}
+                height={o.h}
+                className={`h-auto w-full ${o.flip ? "-scale-x-100" : ""}`}
+              />
+            </motion.div>
           </motion.div>
-          <div className="h-px w-12 bg-blossom/30" />
-        </motion.div>
+        ))}
+      </div>
 
-        <motion.p
-          variants={fadeUpVariants}
-          className="font-sans text-[10px] text-ink/50 mt-4 tracking-widest"
+      <Reveal delay={0.3} className="mt-6 px-6 text-center">
+        <a
+          href={`https://wa.me/?text=${shareText}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-ivory"
         >
-          Dibuat dengan cinta untuk momen terindah dalam hidup kami
-        </motion.p>
-      </motion.div>
+          <MessageCircle size={16} />
+          Bagikan via WhatsApp
+        </a>
+      </Reveal>
     </section>
   );
 }

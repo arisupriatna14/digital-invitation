@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Cormorant_Garamond, Poppins } from "next/font/google";
+import { Playfair_Display, Cormorant_Garamond, Poppins, Pinyon_Script, Cinzel, Fredoka, Special_Elite } from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -16,6 +16,34 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
   weight: ["300", "400", "500"],
   style: ["normal", "italic"],
+});
+
+const pinyon = Pinyon_Script({
+  subsets: ["latin"],
+  variable: "--font-pinyon",
+  display: "swap",
+  weight: "400",
+});
+
+const cinzel = Cinzel({
+  subsets: ["latin"],
+  variable: "--font-cinzel",
+  display: "swap",
+  weight: ["400", "500", "700"],
+});
+
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  variable: "--font-fredoka",
+  display: "swap",
+  weight: ["500", "600"],
+});
+
+const specialElite = Special_Elite({
+  subsets: ["latin"],
+  variable: "--font-typewriter",
+  display: "swap",
+  weight: "400",
 });
 
 const poppins = Poppins({
@@ -44,8 +72,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id" className={`${playfair.variable} ${cormorant.variable} ${poppins.variable}`}>
-      <body className="font-sans antialiased bg-petal text-ink overflow-x-hidden">
+    <html lang="id" className={`${playfair.variable} ${cormorant.variable} ${poppins.variable} ${pinyon.variable} ${cinzel.variable} ${fredoka.variable} ${specialElite.variable}`}>
+      <body className="font-serif antialiased bg-olive text-olive overflow-x-hidden">
         {children}
       </body>
     </html>

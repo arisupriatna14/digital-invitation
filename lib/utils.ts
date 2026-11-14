@@ -71,3 +71,37 @@ export function getRelativeTime(date: Date): string {
   if (diffHours < 24) return rtf.format(-diffHours, "hour");
   return rtf.format(-diffDays, "day");
 }
+
+/**
+ * Salin teks ke clipboard. navigator.clipboard hanya ada di konteks aman
+ * (HTTPS/localhost); di HTTP biasa (mis. akses dari HP lewat IP lokal)
+ * dipakai cara lama lewat execCommand. Mengembalikan true bila berhasil.
+ */
+export async function copyToClipboard(text: string): Promise<boolean> {
+  try {
+    if (typeof navigator !== "undefined" && navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    // lanjut ke cara lama
+  }
+  try {
+    const el = document.createElement("textarea");
+    el.value = text;
+    el.setAttribute("readonly", "");
+    el.style.position = "fixed";
+    el.style.top = "0";
+    el.style.left = "0";
+    el.style.opacity = "0";
+    document.body.appendChild(el);
+    el.focus();
+    el.select();
+    el.setSelectionRange(0, text.length);
+    const ok = document.execCommand("copy");
+    document.body.removeChild(el);
+    return ok;
+  } catch {
+    return false;
+  }
+}

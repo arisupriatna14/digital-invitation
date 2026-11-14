@@ -2,20 +2,37 @@
 
 import { useRef, useState, forwardRef, useImperativeHandle } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music2, VolumeX } from "lucide-react";
+import { VolumeX } from "lucide-react";
 import { SPRING, WEDDING_DATA } from "@/lib/constants";
 
 export interface MusicPlayerRef {
+  /** Panggil langsung di dalam handler klik agar lolos kebijakan autoplay browser */
   startMusic: () => void;
 }
 
-const MusicPlayer = forwardRef<MusicPlayerRef>(function MusicPlayer(_, ref) {
+interface MusicPlayerProps {
+  /** Sembunyikan tombol (mis. saat sampul masih tampil) */
+  hidden?: boolean;
+}
+
+const MusicPlayer = forwardRef<MusicPlayerRef, MusicPlayerProps>(function MusicPlayer({ hidden = false }, ref) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [playing, setPlaying] = useState(false);
 
   useImperativeHandle(ref, () => ({
     startMusic: () => {
-      audioRef.current?.play().then(() => setPlaying(true)).catch(() => {});
+      const audio = audioRef.current;
+      if (!audio) return;
+      audio
+        .play()
+        .then(() => setPlaying(true))
+        .catch(() => {
+          // Autoplay ditolak: coba lagi pada sentuhan/klik berikutnya
+          const retry = () => {
+            audio.play().then(() => setPlaying(true)).catch(() => {});
+          };
+          document.addEventListener("pointerdown", retry, { once: true });
+        });
     },
   }));
 
@@ -31,34 +48,39 @@ const MusicPlayer = forwardRef<MusicPlayerRef>(function MusicPlayer(_, ref) {
 
   return (
     <>
-      <audio ref={audioRef} src={WEDDING_DATA.music.src} loop preload="none" />
+      <audio ref={audioRef} src={WEDDING_DATA.music.src} loop preload="auto" />
       <motion.button
         onClick={toggle}
-        className="fixed bottom-5 right-5 z-50 w-12 h-12 bg-ink/90 text-cream-light rounded-full flex items-center justify-center shadow-xl shadow-ink/30 overflow-hidden"
+        className={`fixed bottom-5 right-5 z-[60] w-12 h-12 rounded-full shadow-xl shadow-black/40 ${hidden ? "hidden" : ""}`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         transition={SPRING.SNAPPY}
         title={playing ? "Matikan musik" : "Putar musik"}
+        aria-label={playing ? "Matikan musik" : "Putar musik"}
       >
-        {/* Pulse ring */}
-        {playing && (
-          <motion.div
-            className="absolute inset-0 rounded-full bg-blossom/40"
-            animate={{ scale: [1, 1.6, 1], opacity: [0.6, 0, 0.6] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          />
-        )}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={playing ? "playing" : "paused"}
-            initial={{ scale: 0, rotate: -90 }}
-            animate={{ scale: 1, rotate: 0 }}
-            exit={{ scale: 0, rotate: 90 }}
-            transition={SPRING.SNAPPY}
-            className="relative z-10"
-          >
-            {playing ? <Music2 size={18} /> : <VolumeX size={18} />}
-          </motion.div>
+        {/* Piringan hitam berputar saat musik diputar */}
+        <span
+          className={`absolute inset-0 rounded-full animate-spin-slow ${playing ? "" : "[animation-play-state:paused]"}`}
+          style={{
+            background:
+              "repeating-radial-gradient(circle, #1a1a1a 0 2px, #2b2b2b 2px 3px), #111",
+          }}
+        >
+          <span className="absolute inset-[34%] rounded-full bg-gradient-to-br from-[#C9A04F] to-[#8A6424]" />
+          <span className="absolute inset-[46%] rounded-full bg-black" />
+        </span>
+        <AnimatePresence>
+          {!playing && (
+            <motion.span
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              transition={SPRING.SNAPPY}
+              className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-ivory-light text-olive flex items-center justify-center"
+            >
+              <VolumeX size={11} />
+            </motion.span>
+          )}
         </AnimatePresence>
       </motion.button>
     </>

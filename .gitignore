@@ -34,3 +34,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# data tamu (ucapan, RSVP, konfirmasi kado) & unggahan bukti transfer
+/data/uploads
+
+# editor
+*.swp

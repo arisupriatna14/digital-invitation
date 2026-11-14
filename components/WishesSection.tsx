@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Quote } from "lucide-react";
-import { EASE } from "@/lib/constants";
+import { EASE, BACKGROUND_IMAGES } from "@/lib/constants";
+import BackgroundCarousel from "@/components/ornaments/BackgroundCarousel";
 import { generateId, getRelativeTime } from "@/lib/utils";
 import SectionHeader from "@/components/ui/SectionHeader";
 
@@ -22,15 +23,15 @@ function WishCard({ wish }: { wish: Wish }) {
       animate={{ opacity: 1, height: "auto", y: 0 }}
       exit={{ opacity: 0, height: 0 }}
       transition={{ duration: 0.4, ease: EASE.OUT_QUART }}
-      className="card-elegant relative overflow-hidden"
+      className="bg-ivory-light border border-olive/10 rounded-2xl shadow-sm p-6 relative overflow-hidden"
     >
-      <Quote size={28} className="text-blossom/40 mb-2 rotate-180" />
-      <p className="font-serif text-sm md:text-base italic text-ink/75 leading-relaxed mb-3">
+      <Quote size={28} className="text-olive-soft/50 mb-2 rotate-180" />
+      <p className="font-serif text-sm md:text-base italic text-olive/75 leading-relaxed mb-3">
         {wish.message}
       </p>
-      <div className="flex items-center justify-between pt-2 border-t border-blossom/15">
-        <p className="font-sans text-xs font-semibold text-ink/70">{wish.name}</p>
-        <p className="font-sans text-[10px] text-ink/30">
+      <div className="flex items-center justify-between pt-2 border-t border-olive/10">
+        <p className="font-sans text-xs font-semibold text-olive/70">{wish.name}</p>
+        <p className="font-sans text-[10px] text-olive/30">
           {getRelativeTime(new Date(wish.createdAt))}
         </p>
       </div>
@@ -40,7 +41,7 @@ function WishCard({ wish }: { wish: Wish }) {
 
 function SkeletonCard() {
   return (
-    <div className="card-elegant space-y-3">
+    <div className="bg-ivory-light border border-olive/10 rounded-2xl shadow-sm p-6 space-y-3">
       <div className="skeleton h-3 w-3/4 rounded-full" />
       <div className="skeleton h-3 w-full rounded-full" />
       <div className="skeleton h-3 w-5/6 rounded-full" />
@@ -102,15 +103,16 @@ export default function WishesSection() {
   const displayedWishes = showAll ? wishes : wishes.slice(0, 5);
 
   return (
-    <section className="bg-gradient-to-b from-petal to-petal-light py-20 md:py-28">
-      <div className="section-container">
+    <section className="section bg-olive">
+      <BackgroundCarousel images={BACKGROUND_IMAGES} dim={0.5} />
+      <div className="relative z-10">
         <SectionHeader
-          eyebrow="Buku Tamu"
-          title="Ucapan & Doa"
+          title="Kirim Doa Restu"
+          tone="dark"
           subtitle="Tulis ucapan dan doa terbaik Anda untuk kami"
         />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="space-y-6">
           {/* Form */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -118,9 +120,9 @@ export default function WishesSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: EASE.OUT_QUART }}
           >
-            <form onSubmit={handleSubmit} className="card-elegant space-y-4">
+            <form onSubmit={handleSubmit} className="bg-ivory-light border border-olive/10 rounded-2xl shadow-sm p-6 space-y-4">
               <div>
-                <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-ink/60 block mb-2">
+                <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-olive/60 block mb-2">
                   Nama
                 </label>
                 <input
@@ -129,13 +131,13 @@ export default function WishesSection() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Nama Anda"
                   required
-                  className="input-elegant"
+                  className="input-olive"
                 />
               </div>
               <div>
-                <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-ink/60 block mb-2">
+                <label className="font-sans text-[10px] uppercase tracking-[0.25em] text-olive/60 block mb-2">
                   Ucapan & Doa{" "}
-                  <span className="normal-case text-ink/30">({message.length}/500)</span>
+                  <span className="normal-case text-olive/30">({message.length}/500)</span>
                 </label>
                 <textarea
                   value={message}
@@ -143,20 +145,20 @@ export default function WishesSection() {
                   placeholder="Tuliskan ucapan dan doa terbaik Anda..."
                   rows={4}
                   required
-                  className="input-elegant resize-none"
+                  className="input-olive resize-none"
                 />
               </div>
               <button
                 type="submit"
                 disabled={submitting || !name.trim() || !message.trim()}
-                className="btn-primary w-full justify-center"
+                className="btn-olive w-full"
               >
                 {submitting ? (
                   <span className="flex items-center gap-2">
                     <motion.span
                       animate={{ rotate: 360 }}
                       transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      className="inline-block w-3 h-3 border border-cream-light/40 border-t-cream-light rounded-full"
+                      className="inline-block w-3 h-3 border border-ivory-light/40 border-t-ivory-light rounded-full"
                     />
                     Mengirim...
                   </span>
@@ -196,14 +198,14 @@ export default function WishesSection() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     onClick={() => setShowAll(true)}
-                    className="btn-ghost w-full justify-center"
+                    className="w-full text-center font-serif text-base text-ivory-light underline underline-offset-4 py-2"
                   >
-                    Lihat semua ({wishes.length}) ucapan
+                    Tampilkan lebih banyak ({wishes.length})
                   </motion.button>
                 )}
                 {wishes.length === 0 && !loading && (
-                  <div className="card-elegant text-center py-8">
-                    <p className="font-serif text-sm italic text-ink/40">
+                  <div className="bg-ivory-light border border-olive/10 rounded-2xl shadow-sm p-6 text-center py-8">
+                    <p className="font-serif text-sm italic text-olive/40">
                       Jadilah yang pertama mengirim ucapan
                     </p>
                   </div>

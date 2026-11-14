@@ -9,6 +9,17 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        olive: {
+          DEFAULT: "#353A20",
+          light: "#474B2F",
+          muted: "#55574A",
+          soft: "#A19C7F",
+        },
+        ivory: {
+          DEFAULT: "#F5F0E8",
+          light: "#FBF8F2",
+          dark: "#E6DECF",
+        },
         ink: {
           DEFAULT: "#4B3B47",
           light: "#6E5B6A",
@@ -36,6 +47,10 @@ const config: Config = {
         },
       },
       fontFamily: {
+        script: ["var(--font-pinyon)", "cursive"],
+        caps: ["var(--font-cinzel)", "serif"],
+        rounded: ["var(--font-fredoka)", "sans-serif"],
+        typewriter: ["var(--font-typewriter)", "monospace"],
         display: ["var(--font-playfair)", "serif"],
         serif: ["var(--font-cormorant)", "serif"],
         sans: ["var(--font-poppins)", "sans-serif"],
@@ -81,6 +96,10 @@ const config: Config = {
           "0%, 100%": { transform: "rotate(-3deg)" },
           "50%": { transform: "rotate(3deg)" },
         },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         "float-petal": "float-petal linear infinite",
@@ -89,6 +108,7 @@ const config: Config = {
         shimmer: "shimmer 2s ease-in-out infinite",
         "pulse-ring": "pulse-ring 2s ease-in-out infinite",
         sway: "sway 4s ease-in-out infinite",
+        "spin-slow": "spin-slow 6s linear infinite",
       },
     },
   },

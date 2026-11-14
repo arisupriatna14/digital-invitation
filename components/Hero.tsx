@@ -1,94 +1,68 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ChevronDown } from "lucide-react";
-import { heroContainerVariants, nameVariants, ampersandVariants, fadeUpVariants } from "@/lib/variants";
-import { WEDDING_DATA } from "@/lib/constants";
-import { formatDate } from "@/lib/utils";
-import CountdownTimer from "@/components/ui/CountdownTimer";
-import FlowerDivider from "@/components/ui/FlowerDivider";
-import FloralCorner from "@/components/ui/FloralCorner";
+import { motion } from "framer-motion";
+import { WEDDING_DATA, EASE, BACKGROUND_IMAGES } from "@/lib/constants";
+import BackgroundCarousel from "@/components/ornaments/BackgroundCarousel";
+import LaceFrame from "@/components/ornaments/LaceFrame";
+import Photo from "@/components/ornaments/Photo";
 
 export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] });
-  const cornerY = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const g = WEDDING_DATA.groom.nickname;
+  const b = WEDDING_DATA.bride.nickname;
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen flex flex-col items-center justify-center bg-petal overflow-hidden"
-    >
-      {/* Floral corners with parallax */}
-      <motion.div style={{ y: cornerY }} className="absolute inset-0 pointer-events-none">
-        <FloralCorner position="top-left" size={240} opacity={0.9} />
-        <FloralCorner position="top-right" size={240} opacity={0.9} />
-        <FloralCorner position="bottom-left" size={190} opacity={0.7} />
-        <FloralCorner position="bottom-right" size={190} opacity={0.7} />
-      </motion.div>
-
-      {/* Subtle radial glow center */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_#FFFBF5_0%,_transparent_65%)] pointer-events-none opacity-60" />
-
-      {/* Main content */}
+    <section className="relative min-h-[100svh] flex flex-col items-center justify-center bg-olive overflow-hidden px-6 py-16 text-ivory-light">
+      <BackgroundCarousel images={BACKGROUND_IMAGES} dim={0.4} />
+      {/* Monogram */}
       <motion.div
-        className="relative z-10 text-center px-8 py-20 max-w-md mx-auto"
-        variants={heroContainerVariants}
-        initial="hidden"
-        animate="visible"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 2, ease: EASE.OUT_QUART, delay: 0.3 }}
+        className="relative z-10 h-28 w-40 text-center"
       >
-        <motion.p variants={fadeUpVariants} className="font-serif text-sm italic text-blossom/80 mb-5 tracking-wide">
-          Bismillahirrahmanirrahim
-        </motion.p>
-
-        <motion.p variants={fadeUpVariants} className="font-sans text-[10px] uppercase tracking-[0.45em] text-ink/40 mb-7">
-          Undangan Pernikahan
-        </motion.p>
-
-        <motion.h1 variants={nameVariants} className="font-display text-4xl md:text-6xl italic text-ink leading-tight">
-          {WEDDING_DATA.groom.name}
-        </motion.h1>
-
-        <motion.div variants={ampersandVariants} className="my-2">
-          <span className="font-serif text-5xl md:text-6xl text-blossom leading-none block">
-            &amp;
-          </span>
-        </motion.div>
-
-        <motion.h1 variants={nameVariants} className="font-display text-4xl md:text-6xl italic text-ink leading-tight">
-          {WEDDING_DATA.bride.name}
-        </motion.h1>
-
-        <motion.div variants={fadeUpVariants}>
-          <FlowerDivider className="my-5" />
-        </motion.div>
-
-        <motion.p variants={fadeUpVariants} className="font-sans text-[10px] uppercase tracking-[0.35em] text-ink/50 mb-8">
-          {formatDate(WEDDING_DATA.akad.date)}
-        </motion.p>
-
-        <motion.div variants={fadeUpVariants}>
-          <CountdownTimer targetDate={WEDDING_DATA.akad.date} />
-        </motion.div>
+        <span className="absolute left-6 top-0 font-script text-[92px] leading-none">{g.charAt(0)}</span>
+        <span className="absolute right-6 top-6 font-script text-[92px] leading-none">{b.charAt(0)}</span>
       </motion.div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
+      <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 2.5, duration: 0.8 }}
+        transition={{ duration: 1.4, delay: 0.8 }}
+        className="relative z-10 font-serif text-base mt-4 tracking-wide"
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-1"
-        >
-          <p className="font-sans text-[9px] uppercase tracking-[0.3em] text-ink/35">Gulir ke bawah</p>
-          <ChevronDown size={16} className="text-ink/35" />
-        </motion.div>
+        Undangan Pernikahan
+      </motion.p>
+
+      {/* Foto dalam bingkai renda oval */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 2.2, ease: EASE.OUT_EXPO, delay: 1 }}
+        className="relative z-10 mt-8"
+      >
+        <LaceFrame shape="oval" band={22} className="w-[320px] h-[250px]">
+          <div className="w-[260px] h-[190px] overflow-hidden rounded-[50%]">
+            {/* Sedikit diperbesar lalu digeser ke kanan agar pasangan tepat di tengah oval */}
+            <Photo src={WEDDING_DATA.photos.hero} alt="Foto mempelai" position="center 68%" className="w-full h-full scale-[1.15] translate-x-[4%]" />
+          </div>
+        </LaceFrame>
       </motion.div>
+
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.6, ease: EASE.OUT_QUART, delay: 1.8 }}
+        className="relative z-10 font-script text-5xl mt-12 text-center"
+      >
+        {g} &amp; {b}
+      </motion.h1>
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.4, delay: 2.4 }}
+        className="relative z-10 font-serif text-base mt-4"
+      >
+        {WEDDING_DATA.hashtag}
+      </motion.p>
     </section>
   );
 }

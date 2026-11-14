@@ -7,8 +7,8 @@
 @layer base {
   html { scroll-behavior: smooth; }
   body {
-    background-color: #FDE8EE;
-    color: #4B3B47;
+    background-color: #353A20;
+    color: #353A20;
     overflow-x: hidden;
   }
   * {
@@ -18,6 +18,68 @@
 }
 
 @layer components {
+  /* Kolom undangan (lebar ponsel), seperti layout side-to-side referensi */
+  .invite-column {
+    @apply relative w-full max-w-[480px] mx-auto bg-white overflow-hidden;
+  }
+
+  .section {
+    @apply relative px-6 py-20 overflow-hidden;
+  }
+
+  .script-title {
+    @apply font-script leading-[1.15] text-5xl;
+  }
+
+  /* Latar kain satin putih untuk halaman sampul */
+  .bg-satin {
+    background:
+      linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.9) 18%, transparent 30%),
+      linear-gradient(160deg, transparent 35%, rgba(210, 210, 206, 0.45) 45%, rgba(255, 255, 255, 0.85) 55%, transparent 68%),
+      linear-gradient(20deg, transparent 60%, rgba(214, 214, 210, 0.4) 72%, rgba(255, 255, 255, 0.9) 82%, transparent 92%),
+      radial-gradient(ellipse 70% 40% at 15% 85%, rgba(205, 205, 200, 0.45), transparent 70%),
+      radial-gradient(ellipse 60% 35% at 90% 10%, rgba(215, 215, 210, 0.5), transparent 70%),
+      #F1F1EE;
+  }
+
+  /* Latar gelap pengganti foto pemandangan referensi */
+  .bg-scenic {
+    background:
+      radial-gradient(ellipse 80% 45% at 50% 0%, rgba(161, 156, 127, 0.35), transparent 70%),
+      radial-gradient(ellipse 90% 50% at 50% 100%, rgba(30, 33, 18, 0.9), transparent 70%),
+      linear-gradient(180deg, #5B6047 0%, #474B2F 38%, #2C301A 100%);
+  }
+
+  .btn-olive {
+    @apply inline-flex items-center justify-center gap-2 bg-olive text-ivory-light font-serif text-base px-5 py-2.5 rounded-md transition-all duration-300 hover:bg-olive-light hover:shadow-lg active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline-olive {
+    @apply inline-flex items-center justify-center gap-2 border border-olive/40 bg-transparent text-olive font-serif text-base px-5 py-2.5 rounded-md transition-all duration-300 hover:bg-olive hover:text-ivory-light active:scale-95;
+  }
+
+  .btn-ivory {
+    @apply inline-flex items-center justify-center gap-2 bg-ivory text-olive font-serif text-base px-5 py-2.5 rounded-md transition-all duration-300 hover:bg-white active:scale-95;
+  }
+
+  .input-olive {
+    @apply w-full bg-white border border-olive/20 rounded-md px-4 py-3 font-serif text-olive placeholder-olive/35 focus:outline-none focus:ring-2 focus:ring-olive/25 focus:border-olive/40 transition-all duration-200;
+    font-size: 16px;
+  }
+
+  /* Slider tanpa scrollbar */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Tepi bawah kertas sobek */
+  .torn-bottom {
+    clip-path: polygon(0 0, 100% 0, 100% 88%, 96% 91%, 91% 87%, 86% 92%, 80% 88%, 74% 93%, 69% 89%, 63% 94%, 57% 89%, 51% 93%, 45% 88%, 39% 94%, 33% 89%, 27% 93%, 21% 88%, 15% 93%, 9% 89%, 4% 94%, 0 90%);
+  }
+
   .section-container {
     @apply max-w-4xl mx-auto px-6 py-16 md:py-24;
   }

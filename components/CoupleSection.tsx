@@ -1,99 +1,94 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { slideLeftVariants, slideRightVariants } from "@/lib/variants";
-import { SPRING, WEDDING_DATA } from "@/lib/constants";
+import { WEDDING_DATA } from "@/lib/constants";
 import SectionHeader from "@/components/ui/SectionHeader";
-import FlowerDivider from "@/components/ui/FlowerDivider";
-interface PersonData {
-  name: string;
-  nickname: string;
-  father: string;
-  mother: string;
-  photo: string;
-  isGroom?: boolean;
+import Polaroid from "@/components/ornaments/Polaroid";
+import Flower from "@/components/ornaments/Flower";
+import Reveal from "@/components/ornaments/Reveal";
+
+function InstagramIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.8" fill="currentColor" />
+    </svg>
+  );
 }
 
-function PersonCard({ data, slideVariant }: {
-  data: PersonData;
-  slideVariant: typeof slideLeftVariants;
-}) {
+interface PersonProps {
+  label: string;
+  name: string;
+  parentLine: string;
+  father: string;
+  mother: string;
+  instagram: string;
+  align: "left" | "right";
+}
+
+function Person({ label, name, parentLine, father, mother, instagram, align }: PersonProps) {
+  const right = align === "right";
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
-      variants={slideVariant}
-      whileHover={{ y: -8, transition: SPRING.SNAPPY }}
-      className="card-elegant flex flex-col items-center text-center cursor-default relative overflow-hidden"
-    >
-      {/* Tiny floral accent top */}
-      <div className="absolute top-3 left-1/2 -translate-x-1/2 opacity-40">
-        <svg width="40" height="16" viewBox="0 0 40 16">
-          <path d="M8 8 Q12 2 20 8 Q28 2 32 8" stroke="#C9798A" strokeWidth="1" fill="none" opacity="0.6" />
-          <circle cx="8" cy="8" r="2.5" fill="#C9798A" opacity="0.5" />
-          <circle cx="20" cy="5" r="2" fill="#F0B8C4" opacity="0.6" />
-          <circle cx="32" cy="8" r="2.5" fill="#C9798A" opacity="0.5" />
-          <path d="M14 8 Q16 5 18 8" stroke="#87A878" strokeWidth="0.8" fill="none" />
-          <path d="M22 8 Q24 5 26 8" stroke="#87A878" strokeWidth="0.8" fill="none" />
-        </svg>
-      </div>
-
-      {/* Photo */}
-      <div className="relative mt-6 mb-5">
-        <div className="w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden ring-4 ring-blossom/25 shadow-lg">
-          <div className="w-full h-full bg-gradient-to-br from-petal to-petal-dark flex items-center justify-center">
-            <span className="font-display text-4xl italic text-blossom/60">
-              {data.name.charAt(0)}
-            </span>
-          </div>
-        </div>
-        {/* Decorative ring */}
-        <div className="absolute inset-0 rounded-full border-2 border-blossom/15 scale-110" />
-      </div>
-
-      <span className="font-sans text-[9px] uppercase tracking-[0.35em] text-blossom/70 mb-2">
-        {data.isGroom ? "Mempelai Pria" : "Mempelai Wanita"}
-      </span>
-
-      <h3 className="font-display text-xl md:text-2xl italic text-ink mb-1">
-        {data.name}
-      </h3>
-
-      <FlowerDivider size="sm" className="my-2 scale-75" />
-
-      <p className="font-sans text-xs text-ink/45 mb-1">
-        {data.isGroom ? "Putra" : "Putri"} dari
+    <Reveal from={right ? "right" : "left"} className={right ? "text-right" : "text-left"}>
+      <p className="font-serif italic text-[17px] text-olive">{label}</p>
+      <h3 className="font-script text-[44px] leading-tight text-olive mt-1">{name}</h3>
+      <p className="font-serif italic text-[16px] text-olive/90 mt-3 leading-snug">
+        {parentLine} {father}
+        <br />&amp; {mother}
       </p>
-      <p className="font-serif text-sm italic text-ink/70">{data.father}</p>
-      <p className="font-sans text-xs text-ink/35 my-0.5">&</p>
-      <p className="font-serif text-sm italic text-ink/70">{data.mother}</p>
-    </motion.div>
+      {instagram && (
+        <a
+          href={`https://instagram.com/${instagram}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 mt-4 font-serif text-[15px] text-olive border-b border-olive/60"
+        >
+          <InstagramIcon /> @{instagram}
+        </a>
+      )}
+    </Reveal>
   );
 }
 
 export default function CoupleSection() {
+  const { groom, bride, photos } = WEDDING_DATA;
+
   return (
-    <section className="bg-gradient-to-b from-petal-dark/30 to-petal py-20 md:py-28 relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full border border-blossom/10 pointer-events-none" />
+    <section className="section bg-white">
+      <SectionHeader
+        title="Mempelai"
+        subtitle="Setiap kisah cinta itu unik, dan kisah kami membawa kami pada hari yang tak terlupakan ini. Dengan penuh sukacita, kami mengundang Anda merayakan persatuan kami."
+      />
 
-      <div className="section-container">
-        <SectionHeader
-          eyebrow="Mempelai"
-          title="Dua Insan yang Dipersatukan"
-          subtitle="Bersatu dalam ikatan suci yang diberkahi Allah SWT"
+      {/* Dua polaroid bertumpuk dengan rangkaian bunga */}
+      <div className="relative h-[430px] -mx-6">
+        <Flower name="carnation" width={90} className="absolute left-[44%] top-0 z-20" from="down" delay={0.5} rotate={10} />
+        <Polaroid src={photos.couple[0]} alt={groom.name} rotate={-4} className="absolute left-3 top-14 w-[52%] z-10" delay={0.1} />
+        <Polaroid src={photos.couple[1]} alt={bride.name} rotate={6} className="absolute right-3 top-2 w-[50%]" delay={0.3} />
+        <Flower name="bouquet" width={170} className="absolute left-[28%] bottom-[-30px] z-20" from="up" delay={0.7} />
+        <Flower name="leaf-pink-sprig" width={60} className="absolute right-0 top-[45%] z-20" from="right" delay={0.9} rotate={-20} />
+      </div>
+
+      <div className="relative mt-16 space-y-4">
+        <Person
+          label="Mempelai Pria"
+          name={groom.name}
+          parentLine="Putra dari"
+          father={groom.father}
+          mother={groom.mother}
+          instagram={groom.instagram}
+          align="left"
         />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-2xl mx-auto">
-          <PersonCard
-            data={{ ...WEDDING_DATA.groom, isGroom: true }}
-            slideVariant={slideLeftVariants}
-          />
-          <PersonCard
-            data={{ ...WEDDING_DATA.bride, isGroom: false }}
-            slideVariant={slideRightVariants}
-          />
-        </div>
+        <Reveal from="zoom" className="text-center font-display text-[110px] leading-none text-olive/15 select-none" >
+          &amp;
+        </Reveal>
+        <Person
+          label="Mempelai Wanita"
+          name={bride.name}
+          parentLine="Putri dari"
+          father={bride.father}
+          mother={bride.mother}
+          instagram={bride.instagram}
+          align="right"
+        />
       </div>
     </section>
   );
