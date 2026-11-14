@@ -6,7 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { GALLERY_IMAGES, EASE } from "@/lib/constants";
 import SectionHeader from "@/components/ui/SectionHeader";
-import Pearls from "@/components/ornaments/Pearls";
 
 const OUT = [0.19, 1, 0.22, 1] as const;
 const VIEW = { once: true, margin: "-40px 0px" } as const;
@@ -71,9 +70,6 @@ export default function GallerySection() {
         >
           <Image src="/images/cover/anthurium-pink.png" alt="" aria-hidden width={275} height={432} className="h-auto w-full" />
         </motion.div>
-        <div className="pointer-events-none absolute left-[26%] top-[19.5%] z-30"><Pearls width={200} loops={2} size={8} /></div>
-        <div className="pointer-events-none absolute left-[20%] top-[61%] z-30"><Pearls width={230} loops={2} size={8} /></div>
-        <div className="pointer-events-none absolute left-[34%] top-[80%] z-0"><Pearls width={200} loops={1} size={8} /></div>
 
         {/* Kartu polaroid */}
         {GALLERY_IMAGES.map((img, i) => {

@@ -53,13 +53,13 @@ export default function SaveTheDateSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEW}
           transition={{ duration: 1.6, ease: OUT }}
-          className="absolute left-[2.5%] -top-[1%] w-[95%]"
+          className="absolute left-[2.5%] -top-[1%] z-10 w-[95%]"
         >
           <Image src="/images/countdown/typewriter-transparent.png" alt="" aria-hidden width={1368} height={2064} className="h-auto w-full" />
         </motion.div>
 
         {/* Teks dipusatkan pada kertas (tepi kertas diukur dari aset: 18,2%-80,8% kanvas) */}
-        <div className="absolute left-[18.2%] top-[17%] w-[62.6%] text-center font-typewriter" style={{ color: INK }}>
+        <div className="absolute left-[18.2%] top-[17%] z-20 w-[62.6%] text-center font-typewriter" style={{ color: INK }}>
           <p className="text-[3.2cqw] tracking-[0.2em] uppercase">
             <Typed text="Save the date" delay={0.6} />
           </p>
@@ -113,40 +113,88 @@ export default function SaveTheDateSection() {
           </motion.a>
         </div>
 
-        {/* Sepasang anthurium, kiri (masuk dari kiri lalu bergoyang) */}
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={VIEW}
-          transition={{ duration: 1.8, ease: OUT, delay: 0.5 }}
-          className="pointer-events-none absolute left-[3.5%] top-[25.4%] w-[27.1%]"
-        >
-          <motion.div
-            animate={{ rotate: [-1.5, 1.5, -1.5] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2.5 }}
-            className="origin-bottom"
-          >
-            <Image src="/images/countdown/anthurium-pair.png" alt="" aria-hidden width={369} height={842} className="h-auto w-full" />
-          </motion.div>
-        </motion.div>
-
-        {/* Anthurium tunggal, kanan */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={VIEW}
-          transition={{ duration: 1.8, ease: OUT, delay: 0.8 }}
-          className="pointer-events-none absolute left-[76%] top-[48.6%] w-[18.1%]"
-        >
-          <motion.div
-            animate={{ rotate: [1.5, -1.5, 1.5] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 3 }}
-            className="origin-bottom"
-          >
-            <Image src="/images/countdown/anthurium-single.png" alt="" aria-hidden width={234} height={405} className="h-auto w-full" />
-          </motion.div>
-        </motion.div>
+        {/* Anthurium: kepala bunga di depan kertas, tangkai di belakang mesin tik */}
+        {/* Sepasang anthurium kiri dipisah jadi dua gambar (kanvas sama 369 x 842)
+            agar bunga tinggi dan bunga tengah bisa digeser terpisah */}
+        <Anthurium
+          src="/images/countdown/anthurium-tall.png"
+          w={369}
+          h={842}
+          headPct={36}
+          className="left-[1.5%] top-[25.4%] w-[27.1%]"
+          fromX={-40}
+          delay={0.5}
+          sway={[-1.5, 1.5, -1.5]}
+          swayDuration={6}
+          swayDelay={2.5}
+        />
+        <Anthurium
+          src="/images/countdown/anthurium-mid.png"
+          w={369}
+          h={842}
+          headPct={76}
+          className="left-[-2.5%] top-[25.4%] w-[27.1%]"
+          fromX={-40}
+          delay={0.65}
+          sway={[1, -1, 1]}
+          swayDuration={6.8}
+          swayDelay={2.8}
+        />
+        <Anthurium
+          src="/images/countdown/anthurium-single.png"
+          w={234}
+          h={405}
+          headPct={61}
+          className="left-[76%] top-[48.6%] w-[18.1%]"
+          fromX={40}
+          delay={0.8}
+          sway={[1.5, -1.5, 1.5]}
+          swayDuration={5}
+          swayDelay={3}
+        />
       </div>
     </section>
+  );
+}
+
+interface AnthuriumProps {
+  src: string;
+  w: number;
+  h: number;
+  /** Persen tinggi gambar yang berisi kepala bunga (bagian ini ditampilkan di depan) */
+  headPct: number;
+  className: string;
+  fromX: number;
+  delay: number;
+  sway: number[];
+  swayDuration: number;
+  swayDelay: number;
+}
+
+// Dirender dua lapis dengan animasi identik: lapisan belakang utuh (tangkainya
+// tertutup mesin tik), lapisan depan dipotong hanya sampai kepala bunga.
+function Anthurium({ src, w, h, headPct, className, fromX, delay, sway, swayDuration, swayDelay }: AnthuriumProps) {
+  return (
+    <>
+      {[false, true].map((front) => (
+        <motion.div
+          key={String(front)}
+          initial={{ opacity: 0, x: fromX }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={VIEW}
+          transition={{ duration: 1.8, ease: OUT, delay }}
+          className={`pointer-events-none absolute ${front ? "z-30" : "z-0"} ${className}`}
+          style={front ? { clipPath: `inset(0 0 ${100 - headPct}% 0)` } : undefined}
+        >
+          <motion.div
+            animate={{ rotate: sway }}
+            transition={{ duration: swayDuration, repeat: Infinity, ease: "easeInOut", delay: swayDelay }}
+            className="origin-bottom"
+          >
+            <Image src={src} alt="" aria-hidden width={w} height={h} className="h-auto w-full" />
+          </motion.div>
+        </motion.div>
+      ))}
+    </>
   );
 }
