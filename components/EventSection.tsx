@@ -50,37 +50,20 @@ export default function EventSection() {
           <Image src="/images/event/lace-rect.png" alt="" aria-hidden width={1135} height={1578} className="h-auto w-full" />
         </motion.div>
 
-        {/* Ornamen: buket calla putih di sudut kanan atas bingkai */}
+        {/* Ornamen: calla magenta di sisi kanan bawah bingkai */}
         <motion.div
-          initial={{ opacity: 0, x: 40, y: -20 }}
+          initial={{ opacity: 0, x: 40, y: 20 }}
           whileInView={{ opacity: 1, x: 0, y: 0 }}
           viewport={VIEW}
-          transition={{ duration: 1.8, ease: OUT, delay: 0.7 }}
-          className="pointer-events-none absolute left-[62%] top-[2%] z-20 w-[46%]"
-        >
-          <motion.div
-            animate={{ rotate: [-1.5, 1.5, -1.5] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-            className="origin-bottom"
-          >
-            <Image src="/images/closing/calla-white-spray.png" alt="" aria-hidden width={687} height={1031} className="h-auto w-full" />
-          </motion.div>
-        </motion.div>
-
-        {/* Ornamen: rangkaian bunga pink di sudut kiri bawah bingkai */}
-        <motion.div
-          initial={{ opacity: 0, x: -30, y: 30 }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          viewport={VIEW}
-          transition={{ duration: 1.8, ease: OUT, delay: 0.9 }}
-          className="pointer-events-none absolute left-[-5%] top-[81.5%] z-20 w-[58%]"
+          transition={{ duration: 1.8, ease: OUT, delay: 0.8 }}
+          className="pointer-events-none absolute left-[68%] top-[71%] z-20 w-[33%]"
         >
           <motion.div
             animate={{ rotate: [-2, 2, -2] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-            className="origin-bottom-left"
+            className="origin-bottom"
           >
-            <Image src="/images/closing/pink-cluster.png" alt="" aria-hidden width={917} height={516} className="h-auto w-full" />
+            <Image src="/images/event/calla-magenta.png" alt="" aria-hidden width={454} height={696} className="h-auto w-full" />
           </motion.div>
         </motion.div>
 

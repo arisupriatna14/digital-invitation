@@ -20,6 +20,8 @@ const config: Config = {
           light: "#FBF8F2",
           dark: "#E6DECF",
         },
+        // Latar section terang (pengganti putih)
+        paper: "#F9F5EB",
         ink: {
           DEFAULT: "#4B3B47",
           light: "#6E5B6A",

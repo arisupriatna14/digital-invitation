@@ -32,7 +32,7 @@ export default function RSVPSection() {
   };
 
   return (
-    <section className="section bg-white pt-6">
+    <section className="section bg-paper pt-6">
       <div>
         <SectionHeader
           title="Konfirmasi Kehadiran"

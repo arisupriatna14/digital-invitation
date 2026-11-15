@@ -2,9 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
 import { WEDDING_DATA } from "@/lib/constants";
-import { formatDate } from "@/lib/utils";
 import WaxSeal from "@/components/ornaments/WaxSeal";
 import Flourish from "@/components/ornaments/Flourish";
 import Reveal from "@/components/ornaments/Reveal";
@@ -27,15 +25,10 @@ const ORNAMENTS = [
 ];
 
 export default function ClosingSection() {
-  const { groom, bride, akad } = WEDDING_DATA;
-  const shareText = typeof window !== "undefined"
-    ? encodeURIComponent(
-        `Assalamu'alaikum, kami mengundang Anda ke pernikahan ${groom.name} & ${bride.name} pada ${formatDate(akad.date)}. Lihat undangan lengkap: ${window.location.origin}`
-      )
-    : "";
+  const { groom, bride } = WEDDING_DATA;
 
   return (
-    <section className="relative bg-olive pt-6 pb-24 overflow-hidden">
+    <section className="relative bg-olive pt-6 pb-10 overflow-hidden">
       <div className="relative w-full [container-type:inline-size]" style={{ aspectRatio: "686 / 1090" }}>
         {/* Lace frame sebagai latar tulisan */}
         <motion.div
@@ -107,17 +100,6 @@ export default function ClosingSection() {
         ))}
       </div>
 
-      <Reveal delay={0.3} className="mt-6 px-6 text-center">
-        <a
-          href={`https://wa.me/?text=${shareText}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn-ivory"
-        >
-          <MessageCircle size={16} />
-          Bagikan via WhatsApp
-        </a>
-      </Reveal>
     </section>
   );
 }

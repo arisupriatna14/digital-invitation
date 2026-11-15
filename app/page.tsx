@@ -12,6 +12,7 @@ import LiveStreamSection from "@/components/LiveStreamSection";
 import RundownSection from "@/components/RundownSection";
 import RSVPSection from "@/components/RSVPSection";
 import GallerySection from "@/components/GallerySection";
+import PhotoboothSection from "@/components/PhotoboothSection";
 import FootageSection from "@/components/FootageSection";
 import GiftSection from "@/components/GiftSection";
 import WishesSection from "@/components/WishesSection";
@@ -79,6 +80,7 @@ function Invitation() {
         <RundownSection />
         <RSVPSection />
         <GallerySection />
+        <PhotoboothSection />
         <FootageSection />
         <GiftSection />
         <WishesSection />

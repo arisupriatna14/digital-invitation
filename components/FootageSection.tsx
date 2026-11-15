@@ -12,7 +12,7 @@ export default function FootageSection() {
   if (!preweddingVideoId && !instagramFilterUrl) return null;
 
   return (
-    <section className="section bg-white">
+    <section className="section bg-paper">
       {preweddingVideoId && (
         <div className="relative">
           <SectionHeader title="Video Prewedding" />

@@ -596,7 +596,7 @@ function GiftWishlist() {
 
 export default function GiftSection() {
   return (
-    <section className="section bg-white">
+    <section className="section bg-paper">
       <div>
         <SectionHeader title="Kirim Hadiah" />
 

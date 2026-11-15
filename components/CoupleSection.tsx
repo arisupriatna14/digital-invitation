@@ -62,7 +62,7 @@ export default function CoupleSection() {
   const { groom, bride, photos } = WEDDING_DATA;
 
   return (
-    <section className="section bg-white !pt-10">
+    <section className="section bg-paper !pt-10">
       <SectionHeader
         className="mb-14"
         title="Mempelai"
@@ -72,8 +72,8 @@ export default function CoupleSection() {
       {/* Dua polaroid bertumpuk dengan rangkaian bunga.
           Posisi dalam persen terhadap kanvas 690 x 700. */}
       <div className="relative -mx-6 [container-type:inline-size]" style={{ aspectRatio: "690 / 700" }}>
-        <Polaroid src={photos.couple[1]} alt={bride.name} rotate={6} className="absolute right-[3%] top-0 w-[50%] z-[5]" delay={0.3} />
-        <Polaroid src={photos.couple[0]} alt={groom.name} rotate={-4} className="absolute left-[3%] top-[12%] w-[52%] z-10" delay={0.1} />
+        <Polaroid src={photos.couple[1]} alt={bride.name} rotate={6} className="absolute right-[6%] top-[1%] w-[46%] z-[5]" delay={0.3} />
+        <Polaroid src={photos.couple[0]} alt={groom.name} rotate={-4} className="absolute left-[6%] top-[13%] w-[48%] z-10" delay={0.1} />
 
         {/* Sepasang anthurium pink (cermin) menyilang di belakang kedua polaroid:
             tangkainya masuk ke balik frame di perbatasan atas tengah */}
@@ -84,7 +84,7 @@ export default function CoupleSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={VIEW}
             transition={{ duration: 1.6, ease: OUT, delay: flip ? 0.8 : 0.6 }}
-            className={`pointer-events-none absolute top-[-13%] z-[8] w-[24%] ${flip ? "left-[35%]" : "left-[42%]"}`}
+            className={`pointer-events-none absolute z-[8] ${flip ? "left-[36%] top-[-7%] w-[18%]" : "left-[40%] top-[-10%] w-[21%]"}`}
           >
             <motion.div
               animate={{ rotate: flip ? [36, 40, 36] : [-36, -40, -36] }}
@@ -102,7 +102,7 @@ export default function CoupleSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEW}
           transition={{ duration: 1.8, ease: OUT, delay: 0.8 }}
-          className="pointer-events-none absolute left-[30%] top-[46%] z-20 w-[36%]"
+          className="pointer-events-none absolute left-[34%] top-[49%] z-20 w-[27%]"
         >
           <motion.div animate={{ rotate: [-1.5, 1.5, -1.5] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="origin-top">
             <Image src="/images/couple/bouquet-mixed.png" alt="" aria-hidden width={450} height={842} className="h-auto w-full" />

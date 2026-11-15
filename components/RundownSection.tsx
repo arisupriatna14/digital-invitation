@@ -20,7 +20,7 @@ export default function RundownSection() {
   const items = WEDDING_DATA.rundown;
 
   return (
-    <section className="section bg-white">
+    <section className="section bg-paper">
       <SectionHeader title="Susunan Acara" className="mb-8" />
 
       <div className="text-center">

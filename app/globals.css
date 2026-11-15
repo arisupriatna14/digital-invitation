@@ -20,7 +20,7 @@
 @layer components {
   /* Kolom undangan (lebar ponsel), seperti layout side-to-side referensi */
   .invite-column {
-    @apply relative w-full max-w-[480px] mx-auto bg-white overflow-hidden;
+    @apply relative w-full max-w-[480px] mx-auto bg-paper overflow-hidden;
   }
 
   .section {
@@ -120,3 +120,42 @@
 }
 
 .petal { will-change: transform; position: absolute; }
+
+/* Photobooth: strip "dicetak" bertahap keluar dari celah printer. Satu siklus
+   = 2 strip (pink + olive) = 8 langkah; tiap langkah diam dulu lalu geser satu
+   bingkai foto dengan ease. --strip-h = jarak antar strip (pitch), nilai
+   translateY dalam kelipatan 2 pitch. Dibuat oleh skrip, lihat PhotoboothSection. */
+@keyframes strip-feed {
+  0% { transform: translateY(0); animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  8.333% { transform: translateY(calc(var(--strip-h) * 0.0000)); animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  12.500% { transform: translateY(calc(var(--strip-h) * 0.2110)); animation-timing-function: linear; }
+  20.833% { transform: translateY(calc(var(--strip-h) * 0.2110)); animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  25.000% { transform: translateY(calc(var(--strip-h) * 0.4740)); animation-timing-function: linear; }
+  33.333% { transform: translateY(calc(var(--strip-h) * 0.4740)); animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  37.500% { transform: translateY(calc(var(--strip-h) * 0.7370)); animation-timing-function: linear; }
+  45.833% { transform: translateY(calc(var(--strip-h) * 0.7370)); animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  50.000% { transform: translateY(calc(var(--strip-h) * 1.0000)); animation-timing-function: linear; }
+  58.333% { transform: translateY(calc(var(--strip-h) * 1.0000)); animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  62.500% { transform: translateY(calc(var(--strip-h) * 1.2110)); animation-timing-function: linear; }
+  70.833% { transform: translateY(calc(var(--strip-h) * 1.2110)); animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  75.000% { transform: translateY(calc(var(--strip-h) * 1.4740)); animation-timing-function: linear; }
+  83.333% { transform: translateY(calc(var(--strip-h) * 1.4740)); animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  87.500% { transform: translateY(calc(var(--strip-h) * 1.7370)); animation-timing-function: linear; }
+  95.833% { transform: translateY(calc(var(--strip-h) * 1.7370)); animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1); }
+  100.000% { transform: translateY(calc(var(--strip-h) * 2.0000)); animation-timing-function: linear; }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+.animate-strip-feed {
+  animation-name: strip-feed;
+  will-change: transform;
+}
+.animate-twinkle {
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-strip-feed { animation-duration: 0.01s !important; animation-iteration-count: 1 !important; }
+  .animate-twinkle { animation: none; }
+}
