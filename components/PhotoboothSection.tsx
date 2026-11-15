@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { WEDDING_DATA } from "@/lib/constants";
+import SectionHeader from "@/components/ui/SectionHeader";
 
 const OUT = [0.19, 1, 0.22, 1] as const;
 
@@ -62,7 +62,6 @@ function Sparkle({ x, y, s, c, star, d }: (typeof SPARKLES)[number]) {
 // Photobooth: strip foto "dicetak" keluar dari celah printer, lalu terus
 // bergulir ke bawah tanpa henti (seperti rekaman contoh).
 export default function PhotoboothSection() {
-  const { groom, bride } = WEDDING_DATA;
   const ref = useRef<HTMLDivElement>(null);
   const playing = useInView(ref, { once: true, margin: "-15% 0px" });
 
@@ -76,31 +75,12 @@ export default function PhotoboothSection() {
       </div>
 
       {/* Judul */}
-      <div className="relative z-10 text-center">
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-40px 0px" }}
-          transition={{ duration: 1, ease: OUT }}
-          className="font-script text-[34px] leading-none text-ivory"
-        >
-          {groom.nickname} &amp; {bride.nickname}
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-40px 0px" }}
-          transition={{ duration: 1.1, ease: OUT, delay: 0.15 }}
-          className="mt-1 font-rounded text-[min(12.5cqw,56px)] font-semibold leading-none tracking-[0.04em] text-ivory-light"
-        >
-          PHOTOBOOTH
-        </motion.h2>
-      </div>
+      <SectionHeader title="Potret Kami" tone="dark" className="mb-6" />
 
       {/* Printer + strip. cqw di dalamnya relatif terhadap lebar printer. */}
       <div
         ref={ref}
-        className="relative z-10 mx-auto mt-8 w-[80%] [container-type:inline-size]"
+        className="relative z-10 mx-auto w-[80%] [container-type:inline-size]"
         style={{ aspectRatio: "885 / 306" }}
       >
         {/* Badan printer (lapisan belakang) */}

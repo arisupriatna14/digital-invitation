@@ -63,17 +63,17 @@ export const WEDDING_DATA = {
   loveStory: [
     {
       title: "Awal Bertemu",
-      text: "[Ceritakan bagaimana kalian pertama kali bertemu. Sebuah sapaan sederhana yang perlahan tumbuh menjadi pertemanan yang hangat.]",
+      text: "Sebuah sapaan sederhana yang perlahan tumbuh menjadi pertemanan yang hangat.",
       photo: "/images/photos/photo-9.jpg",
     },
     {
       title: "Tumbuh Bersama",
-      text: "[Ceritakan perjalanan kalian. Melewati berbagai musim dengan sabar, saling memahami, dan saling menguatkan.]",
+      text: "Melewati berbagai musim dengan sabar, saling memahami dan saling menguatkan.",
       photo: "/images/photos/photo-5.jpg",
     },
     {
       title: "Selamanya Dimulai",
-      text: "[Ceritakan momen lamaran. Dengan restu kedua keluarga, kami memutuskan untuk melangkah ke jenjang pernikahan.]",
+      text: "Dengan restu kedua keluarga, kami memutuskan untuk melangkah ke jenjang pernikahan.",
       photo: "/images/photos/photo-3.jpg",
     },
   ],
@@ -81,15 +81,6 @@ export const WEDDING_DATA = {
     url: "",
     thumbnail: "",
   },
-  rundown: [
-    { time: "09.00", title: "Akad Nikah" },
-    { time: "10.00", title: "Sesi Foto Keluarga" },
-    { time: "11.00", title: "Penyambutan Tamu" },
-    { time: "11.30", title: "Kirab Pengantin" },
-    { time: "12.00", title: "Ramah Tamah & Jamuan" },
-    { time: "13.00", title: "Sesi Foto Bersama" },
-    { time: "14.00", title: "Penutup" },
-  ],
   // ID video YouTube prewedding, kosongkan untuk menyembunyikan
   preweddingVideoId: "",
   instagramFilterUrl: "",

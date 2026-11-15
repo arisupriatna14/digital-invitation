@@ -518,14 +518,13 @@ function GiftWishlist() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px 0px" }}
       transition={{ duration: 0.8, ease: EASE.OUT_QUART }}
-      className="mt-14"
     >
       <div className="text-center">
-        <span className="inline-flex items-center gap-2 font-sans text-[10px] uppercase tracking-[0.3em] text-olive/60">
+        <span className="inline-flex items-center gap-2 font-sans text-[10px] uppercase tracking-[0.3em] text-ivory/70">
           <Heart size={11} className="fill-blossom text-blossom" /> Wishlist Kado
         </span>
-        <h3 className="mt-2 font-script text-4xl leading-tight text-olive">Rekomendasi Kado</h3>
-        <p className="mx-auto mt-2 max-w-xs font-serif text-[16px] leading-snug text-olive/70">
+        <h3 className="mt-2 font-script text-4xl leading-tight text-ivory-light">Rekomendasi Kado</h3>
+        <p className="mx-auto mt-2 max-w-xs font-serif text-[16px] leading-snug text-ivory/85">
           Geser kartu ke kiri atau kanan untuk melihat barang yang sedang kami impikan
         </p>
       </div>
@@ -538,12 +537,12 @@ function GiftWishlist() {
               key="empty"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="absolute inset-0 flex flex-col items-center justify-center rounded-[26px] border border-dashed border-olive/25 bg-ivory-light/60 px-6 text-center"
+              className="absolute inset-0 flex flex-col items-center justify-center rounded-[26px] border border-dashed border-ivory/40 bg-ivory/10 px-6 text-center"
             >
               <Heart size={28} className="fill-blossom text-blossom" />
-              <p className="mt-4 font-display text-lg italic text-olive">Itu semua wishlist kami</p>
-              <p className="mt-1 font-serif text-sm text-olive/60">Terima kasih sudah melihat-lihat</p>
-              <button type="button" onClick={() => setCursor(0)} className="btn-outline-olive mt-5">
+              <p className="mt-4 font-display text-lg italic text-ivory-light">Itu semua wishlist kami</p>
+              <p className="mt-1 font-serif text-sm text-ivory/75">Terima kasih sudah melihat-lihat</p>
+              <button type="button" onClick={() => setCursor(0)} className="btn-ivory mt-5">
                 <RotateCcw size={13} /> Lihat Lagi
               </button>
             </motion.div>
@@ -587,7 +586,7 @@ function GiftWishlist() {
       {/* Indikator */}
       <div className="mt-12 flex justify-center gap-1.5">
         {items.map((_, i) => (
-          <span key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === cursor ? "w-5 bg-olive" : i < cursor ? "w-1.5 bg-olive/50" : "w-1.5 bg-olive/20"}`} />
+          <span key={i} className={`h-1.5 rounded-full transition-all duration-300 ${i === cursor ? "w-5 bg-ivory-light" : i < cursor ? "w-1.5 bg-ivory/60" : "w-1.5 bg-ivory/25"}`} />
         ))}
       </div>
     </motion.div>
@@ -619,8 +618,16 @@ export default function GiftSection() {
         <BankSelector />
 
         <GiftAddress />
-        <GiftWishlist />
       </div>
+    </section>
+  );
+}
+
+// Rekomendasi kado sebagai section terpisah berlatar olive
+export function GiftWishlistSection() {
+  return (
+    <section className="section bg-olive">
+      <GiftWishlist />
     </section>
   );
 }

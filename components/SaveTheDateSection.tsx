@@ -2,8 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { WEDDING_DATA, BACKGROUND_IMAGES } from "@/lib/constants";
-import BackgroundCarousel from "@/components/ornaments/BackgroundCarousel";
+import { WEDDING_DATA } from "@/lib/constants";
 import { formatDate } from "@/lib/utils";
 import CountdownTimer from "@/components/ui/CountdownTimer";
 
@@ -44,9 +43,8 @@ export default function SaveTheDateSection() {
   )}&dates=${toCalendarStamp(akad.date)}/${toCalendarStamp(resepsi.date)}&location=${encodeURIComponent(akad.address)}`;
 
   return (
-    <section className="relative overflow-hidden bg-olive">
-      <BackgroundCarousel images={BACKGROUND_IMAGES} dim={0.4} />
-      <div className="relative z-10 w-full overflow-hidden [container-type:inline-size]" style={{ aspectRatio: "872 / 1150" }}>
+    <section className="relative overflow-hidden bg-paper">
+      <div className="relative z-10 w-full overflow-hidden [container-type:inline-size]" style={{ aspectRatio: "872 / 1128" }}>
         {/* Mesin tik + kertas (bagian tuts terpotong di bawah seperti desain) */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
@@ -55,7 +53,7 @@ export default function SaveTheDateSection() {
           transition={{ duration: 1.6, ease: OUT }}
           className="absolute left-[2.5%] -top-[1%] z-10 w-[95%]"
         >
-          <Image src="/images/countdown/typewriter-transparent.png" alt="" aria-hidden width={1368} height={2064} className="h-auto w-full" />
+          <Image src="/images/countdown/typewriter-v2.png" alt="" aria-hidden width={1366} height={1894} className="h-auto w-full" />
         </motion.div>
 
         {/* Teks dipusatkan pada kertas (tepi kertas diukur dari aset: 18,2%-80,8% kanvas) */}

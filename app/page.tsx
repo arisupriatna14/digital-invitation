@@ -5,16 +5,14 @@ import EnvelopeOpening from "@/components/EnvelopeOpening";
 import Hero from "@/components/Hero";
 import OpeningSection from "@/components/OpeningSection";
 import CoupleSection from "@/components/CoupleSection";
-import LoveStorySection from "@/components/LoveStorySection";
+import LoveStoryCollageSection from "@/components/LoveStoryCollageSection";
 import SaveTheDateSection from "@/components/SaveTheDateSection";
 import EventSection from "@/components/EventSection";
 import LiveStreamSection from "@/components/LiveStreamSection";
-import RundownSection from "@/components/RundownSection";
 import RSVPSection from "@/components/RSVPSection";
-import GallerySection from "@/components/GallerySection";
 import PhotoboothSection from "@/components/PhotoboothSection";
 import FootageSection from "@/components/FootageSection";
-import GiftSection from "@/components/GiftSection";
+import GiftSection, { GiftWishlistSection } from "@/components/GiftSection";
 import WishesSection from "@/components/WishesSection";
 import ClosingSection from "@/components/ClosingSection";
 import MusicPlayer, { type MusicPlayerRef } from "@/components/ui/MusicPlayer";
@@ -73,16 +71,17 @@ function Invitation() {
         <Hero />
         <OpeningSection />
         <CoupleSection />
-        <LoveStorySection />
+        {/* Kisah Cinta versi lama (LoveStorySection) disembunyikan; komponennya tetap ada */}
+        <LoveStoryCollageSection />
         <SaveTheDateSection />
         <EventSection />
         <LiveStreamSection />
-        <RundownSection />
-        <RSVPSection />
-        <GallerySection />
+        {/* Potret Kami (GallerySection) disembunyikan; komponennya tetap ada */}
         <PhotoboothSection />
         <FootageSection />
         <GiftSection />
+        <GiftWishlistSection />
+        <RSVPSection />
         <WishesSection />
         <ClosingSection />
       </main>
