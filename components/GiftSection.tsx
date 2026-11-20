@@ -626,7 +626,7 @@ export default function GiftSection() {
 // Rekomendasi kado sebagai section terpisah berlatar olive
 export function GiftWishlistSection() {
   return (
-    <section className="section bg-olive">
+    <section className="section bg-moss">
       <GiftWishlist />
     </section>
   );

@@ -24,7 +24,7 @@ const ORNAMENTS = [
 
 export default function LoveStorySection() {
   return (
-    <section className="section bg-olive">
+    <section className="section bg-moss">
       <SectionHeader title="Kisah Cinta Kami" tone="dark" />
 
       <div className="space-y-20">

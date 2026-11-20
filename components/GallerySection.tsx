@@ -105,7 +105,7 @@ export default function GallerySection() {
   const nextPhoto = () => setLightboxIndex((i) => (i !== null ? (i + 1) % GALLERY_IMAGES.length : null));
 
   return (
-    <section className="section bg-olive pb-16">
+    <section className="section bg-moss pb-16">
       <SectionHeader title="Potret Kami" tone="dark" subtitle="Sepenggal momen yang kami abadikan" />
 
       {/* Printer: kartu-kartu polaroid "dicetak" keluar dari celahnya */}

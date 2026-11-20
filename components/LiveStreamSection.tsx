@@ -12,7 +12,7 @@ export default function LiveStreamSection() {
 
   return (
     <>
-      <section className="section bg-olive pt-10 pb-24">
+      <section className="section bg-moss pt-10 pb-24">
         <Reveal from="up" className="relative mx-auto max-w-[320px] bg-white z-10">
           <a href={liveStream.url} target="_blank" rel="noopener noreferrer" className="relative block aspect-square">
             <Photo src={liveStream.thumbnail} alt="Live streaming" className="w-full h-full" />

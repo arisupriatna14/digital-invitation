@@ -22,6 +22,8 @@ const config: Config = {
         },
         // Latar section terang (pengganti putih)
         paper: "#F9F5EB",
+        // Latar section olive polos
+        moss: "#777956",
         ink: {
           DEFAULT: "#4B3B47",
           light: "#6E5B6A",

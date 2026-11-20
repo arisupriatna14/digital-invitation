@@ -50,7 +50,7 @@ export const WEDDING_DATA = {
     bismillah: "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
     arabic:
       "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً",
-    text: "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.",
+    text: "Dan di antara tanda‑tanda (kebesaran)‑Nya ialah Dia menciptakan pasangan‑pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.",
     source: "Q.S. Ar-Rum: 21",
   },
   // Kosongkan string foto untuk menampilkan placeholder
@@ -73,7 +73,8 @@ export const WEDDING_DATA = {
     },
     {
       title: "Selamanya Dimulai",
-      text: "Dengan restu kedua keluarga, kami memutuskan untuk melangkah ke jenjang pernikahan.",
+      // Baris baru (\n) ditampilkan sebagai paragraf terpisah
+      text: "Bukan sekadar tentang dua hati yang bertemu, melainkan tentang dua insan yang memilih untuk saling menjaga dalam ketaatan kepada‑Nya.\nAtas kehendak dan izin‑Nya, serta dengan doa dan restu kedua keluarga, kami akan menyatukan dua insan dalam ikatan pernikahan.",
       photo: "/images/photos/photo-3.jpg",
     },
   ],
@@ -118,7 +119,7 @@ export const SPRING = {
 };
 
 // Foto latar (carousel) untuk section pembuka & save the date
-export const BACKGROUND_IMAGES = ["/images/bg/bg-1.jpg"];
+export const BACKGROUND_IMAGES = ["/images/bg/bg-hills-2.webp"];
 
 export const GALLERY_IMAGES = [
   { src: "/images/photos/photo-1.jpg", alt: "Foto Prewedding 1" },

@@ -66,7 +66,7 @@ export default function PhotoboothSection() {
   const playing = useInView(ref, { once: true, margin: "-15% 0px" });
 
   return (
-    <section className="section bg-olive pb-10 pt-16 [container-type:inline-size]">
+    <section className="section bg-moss pb-10 pt-16 [container-type:inline-size]">
       {/* Bintang & titik pastel */}
       <div className="pointer-events-none absolute inset-0 z-0">
         {SPARKLES.map((sp, i) => (

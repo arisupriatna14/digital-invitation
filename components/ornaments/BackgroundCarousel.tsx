@@ -9,12 +9,14 @@ interface BackgroundCarouselProps {
   interval?: number;
   /** Kegelapan lapisan di atas gambar, 0-1 */
   dim?: number;
+  /** Warna solid di belakang gambar (terlihat bila gambar transparan) */
+  backdrop?: string;
   className?: string;
 }
 
 // Latar foto layar penuh: tiap gambar perlahan membesar (efek Ken Burns),
 // dan bila ada beberapa gambar, berganti dengan crossfade.
-export default function BackgroundCarousel({ images, interval = 7, dim = 0.45, className = "" }: BackgroundCarouselProps) {
+export default function BackgroundCarousel({ images, interval = 7, dim = 0.45, backdrop = "#77613E", className = "" }: BackgroundCarouselProps) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export default function BackgroundCarousel({ images, interval = 7, dim = 0.45, c
   }, [images.length, interval]);
 
   return (
-    <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden>
+    <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} style={{ backgroundColor: backdrop }} aria-hidden>
       <AnimatePresence initial={false}>
         <motion.div
           key={images[index]}

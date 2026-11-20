@@ -15,7 +15,7 @@ export default function LoveStoryCollageSection() {
   const last = chapters[chapters.length - 1];
 
   return (
-    <section className="relative overflow-hidden px-6 pt-16 pb-16 text-ivory-light">
+    <section className="relative overflow-hidden px-6 pt-16 text-ivory-light">
       {/* Latar foto blur olive */}
       <Image
         src="/images/lovestory/bg.jpg"
@@ -26,9 +26,6 @@ export default function LoveStoryCollageSection() {
         sizes="(max-width: 480px) 100vw, 480px"
         className="object-cover"
       />
-      {/* Gradasi ke olive di tepi bawah agar menyatu dengan section berikutnya
-          (bagian bawah foto latarnya terang) */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-b from-transparent to-olive" />
 
       <div className="relative z-10">
         <motion.h2
@@ -83,9 +80,20 @@ export default function LoveStoryCollageSection() {
           className="mx-auto mt-10 max-w-[360px] text-center font-sans"
         >
           <p className="text-[16px]">{last.title}</p>
-          <p className="mt-5 text-[14px] leading-[1.55]">{last.text}</p>
+          <p className="mt-5 whitespace-pre-line text-[14px] leading-[1.55]">{last.text}</p>
         </motion.div>
       </div>
+
+      {/* Renda bunga di tepi bawah (selebar section, turun 2px agar tidak ada celah) */}
+      <motion.div
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={VIEW}
+        transition={{ duration: 1.4, ease: OUT, delay: 0.2 }}
+        className="pointer-events-none relative z-10 -mx-6 -mb-[2px] mt-12"
+      >
+        <Image src="/images/lovestory/lace-bottom.png" alt="" aria-hidden width={1366} height={167} className="block h-auto w-full" sizes="(max-width: 480px) 100vw, 480px" />
+      </motion.div>
     </section>
   );
 }

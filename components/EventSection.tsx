@@ -26,7 +26,7 @@ export default function EventSection() {
   const addressLines = akad.address.split(", ");
 
   return (
-    <section className="relative overflow-hidden bg-olive py-4">
+    <section className="relative overflow-hidden bg-moss py-4">
       <div className="relative w-full [container-type:inline-size]" style={{ aspectRatio: "694 / 1100" }}>
         {/* Judul */}
         <motion.h2

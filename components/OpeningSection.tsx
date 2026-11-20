@@ -13,11 +13,14 @@ export default function OpeningSection() {
   const { quote } = WEDDING_DATA;
 
   return (
-    <section className="bg-olive px-0 py-6 overflow-hidden">
+    <section className="relative flex min-h-[100svh] flex-col bg-moss px-0 overflow-hidden">
+
       {/* Kanvas diperbesar 120% (sisi kiri-kanan desain yang kosong dipotong)
           agar bingkai & bunga tampil lebih besar; teks ikut menskala. */}
+      {/* Bingkai di tengah ruang di atas lantai (section setinggi satu layar) */}
+      <div className="flex flex-1 items-center">
       <div
-        className="relative -ml-[10%] w-[120%] [container-type:inline-size]"
+        className="relative -ml-[10%] w-[120%] shrink-0 [container-type:inline-size]"
         style={{ aspectRatio: "876 / 1032" }}
       >
         {/* Bingkai renda oval */}
@@ -31,26 +34,22 @@ export default function OpeningSection() {
           <Image src="/images/quran/lace-oval.png" alt="" aria-hidden width={1043} height={1365} className="h-auto w-full" />
         </motion.div>
 
-        {/* Isi ayat */}
+        {/* Isi ayat, dipusatkan vertikal di dalam bingkai oval */}
+        <div className="absolute left-[29%] top-[15%] flex h-[66%] w-[42%] items-center">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={VIEW}
           transition={{ duration: 1.4, ease: OUT, delay: 0.5 }}
-          className="absolute left-[29%] top-[21%] w-[42%] text-center text-[#2B2B23]"
+          className="w-full text-center text-[#2B2B23]"
         >
           <h2 className="font-caps text-[3.2cqw] font-bold tracking-wide">{quote.title}</h2>
 
-          <p className="arabic mt-[4cqw] text-[3cqw] !leading-[1.9]">
-            {quote.bismillah}
-            <br />
-            {quote.arabic}
-          </p>
+          <span className="mx-auto mt-[3cqw] block h-px w-[14cqw] bg-[#2B2B23]/70" />
 
-          <span className="mx-auto mt-[2cqw] block h-px w-[14cqw] bg-[#2B2B23]/70" />
-
-          <p className="mt-[3cqw] font-sans text-[2.2cqw] leading-[1.6]">&ldquo;{quote.text}&rdquo;</p>
+          <p className="mt-[3cqw] font-sans text-[2.4cqw] leading-[1.6]">&ldquo;{quote.text}&rdquo;</p>
         </motion.div>
+        </div>
 
         {/* Bunga lili, kiri atas (masuk dari kiri) */}
         <motion.div
@@ -80,6 +79,18 @@ export default function OpeningSection() {
           </motion.div>
         </motion.div>
       </div>
+      </div>
+
+      {/* Lantai motif catur di tepi bawah (turun 2px agar tidak ada celah) */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={VIEW}
+        transition={{ duration: 1.4, ease: OUT, delay: 0.2 }}
+        className="pointer-events-none relative -mb-[2px]"
+      >
+        <Image src="/images/quran/floor-bottom.png" alt="" aria-hidden width={1366} height={238} className="block h-auto w-full" sizes="(max-width: 480px) 100vw, 480px" />
+      </motion.div>
     </section>
   );
 }

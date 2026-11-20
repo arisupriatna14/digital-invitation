@@ -28,7 +28,7 @@ export default function ClosingSection() {
   const { groom, bride } = WEDDING_DATA;
 
   return (
-    <section className="relative bg-olive pt-6 pb-10 overflow-hidden">
+    <section className="relative bg-moss pt-6 pb-10 overflow-hidden">
       <div className="relative w-full [container-type:inline-size]" style={{ aspectRatio: "686 / 1090" }}>
         {/* Lace frame sebagai latar tulisan */}
         <motion.div
